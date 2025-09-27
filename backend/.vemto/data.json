@@ -1,0 +1,3265 @@
+{
+    "tables": {
+        "projects": {
+            "item_1": {
+                "uuid": "e09bab56-d746-4804-bcf6-0564c5c5356f",
+                "id": 1,
+                "createdAt": "2025-09-27 11:56:07",
+                "updatedAt": "2025-09-27 12:04:47",
+                "settings": {
+                    "cssFramework": "tailwind",
+                    "uiStarterKit": "other",
+                    "usesLivewire": false,
+                    "usesInertia": false,
+                    "usesVue": false,
+                    "usesReact": false,
+                    "usesSvelte": false,
+                    "isFreshLaravelProject": false,
+                    "blueprintModeEnabled": false,
+                    "schemaReaderMode": "db",
+                    "schemaReaderDbDriver": "sqlite",
+                    "schemaReaderDbHost": "\"db\"",
+                    "schemaReaderDbPort": "\"3306\"",
+                    "schemaReaderDbUsername": "\"db\"",
+                    "schemaReaderDbPassword": "\"db\"",
+                    "schemaReaderDbDatabase": "vemto_schema_reader",
+                    "laravelVersion": "12.0"
+                },
+                "canShowSchemaSourceChangesAlert": false,
+                "codeGenerationSettings": {
+                    "models": true,
+                    "factories": true,
+                    "seeders": true,
+                    "policies": true,
+                    "requests": true,
+                    "controllers": true,
+                    "routes": true,
+                    "views": false,
+                    "uiComponents": false,
+                    "livewireLayout": false,
+                    "translationsOnViews": true,
+                    "translationsFormat": "underscore"
+                },
+                "languages": [
+                    "en"
+                ],
+                "defaultLanguage": "en",
+                "translations": {
+                    "en": {
+                        "navigation.home": "Home",
+                        "navigation.apps": "Apps"
+                    }
+                },
+                "vthemeKeys": {
+                    "default.delay": "opacity-75",
+                    "table": "min-w-full divide-y divide-gray-200",
+                    "table.container": "overflow-hidden border rounded-lg",
+                    "table.head": "bg-gray-50",
+                    "table.head.row": "text-gray-500",
+                    "table.head.col": "px-5 py-3 text-xs font-medium text-left uppercase",
+                    "table.body": "bg-white divide-y divide-gray-200 dark:divide-gray-700",
+                    "table.body.row": "text-gray-800",
+                    "table.body.col": "px-5 py-4 text-sm whitespace-nowrap",
+                    "ui.button": "inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 rounded-md bg-indigo-500 hover:bg-indigo-600 focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 focus:shadow-outline focus:outline-none",
+                    "ui.input": "inline-flex h-10 px-3 py-2 text-sm bg-white border rounded-md border-gray-300 ring-offset-background placeholder:text-gray-500 focus:border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 disabled:cursor-not-allowed disabled:opacity-50",
+                    "ui.input.checkbox": "",
+                    "ui.label": "block mb-1.5 font-medium text-sm text-gray-700",
+                    "ui.input.error": "text-sm text-red-600",
+                    "ui.breadcrumbs.container": "flex justify-between py-1",
+                    "ui.breadcrumbs.list": "inline-flex items-center mb-3 space-x-1 text-xs text-neutral-500 [&_.active-breadcrumb]:text-neutral-600 [&_.active-breadcrumb]:font-medium sm:mb-0",
+                    "ui.breadcrumbs.list.item": "",
+                    "ui.breadcrumbs.list.item.link": "inline-flex items-center py-1 font-normal hover:text-neutral-900 focus:outline-none",
+                    "ui.breadcrumbs.separator": "w-5 h-5 text-gray-400/70",
+                    "crud.index.container": "max-w-7xl mx-auto py-10 sm:px-6 lg:px-8 space-y-4",
+                    "crud.table.head.col.extra": "cursor-pointer",
+                    "crud.table.head.action-col": "px-5 py-3 text-xs font-medium text-right uppercase",
+                    "crud.table.body.col.extra": "max-w-xs truncate",
+                    "crud.table.body.action-col": "px-5 py-4 text-sm font-medium text-right whitespace-nowrap space-x-2",
+                    "crud.action-link": "text-indigo-600 hover:text-indigo-700 cursor-pointer",
+                    "crud.action-link-danger": "text-red-600 hover:text-red-700 cursor-pointer",
+                    "crud.index.tools": "flex justify-between align-top py-4",
+                    "crud.pagination.container": "mt-2",
+                    "crud.container": "max-w-7xl mx-auto py-10 sm:px-6 lg:px-8 space-y-4",
+                    "crud.header": "w-full text-gray-500 text-lg font-semibold py-4 uppercase",
+                    "crud.form": "w-full mb-0",
+                    "crud.form.container": "overflow-hidden border rounded-lg bg-white",
+                    "crud.form.inputs.container": "p-6 space-y-3",
+                    "crud.form.input.group": "w-full",
+                    "crud.form.input.radio.group": "flex flex-wrap flex-col gap-2",
+                    "crud.form.input.radio.box": "inline-flex justify-start gap-2",
+                    "ui.input.radio": "!w-4 !h-4 text-indigo-600 transition duration-150 ease-in-out border-gray-300 rounded-md focus:ring-indigo-500",
+                    "crud.form.input.extra": "w-full",
+                    "crud.form.input.image": "object-cover rounded border border-gray-200 w-36 h-36 cursor-pointer bg-gray-50 hover:opacity-75 transition duration-100 ease-in-out",
+                    "crud.form.input.image.button": "p-0.5 px-1 text-xs border border-gray-200 rounded hover:bg-gray-200",
+                    "crud.form.input.file.name": "text-sm text-gray-500 p-1 rounded-sm bg-gray-50 border border-gray-200 mb-1",
+                    "crud.form.buttons-container": "flex justify-between mt-4 border-t border-gray-50 p-4"
+                },
+                "vthemeCdn": "https://cdn.tailwindcss.com",
+                "connectionFinished": true,
+                "canIgnoreNextSchemaSourceChanges": false,
+                "lastReadSchemaDataHash": "1c5045831c2c2796f0f4ef922ce7e245"
+            },
+            "__tableData": {
+                "count": 1,
+                "lastPrimaryKey": 1,
+                "index": {
+                    "1": {
+                        "hasMany": {
+                            "tables.projectId": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8,
+                                9
+                            ],
+                            "models.projectId": [
+                                1
+                            ],
+                            "app_sections.projectId": [
+                                1,
+                                2,
+                                3,
+                                4
+                            ],
+                            "schema_sections.projectId": [
+                                1,
+                                2
+                            ],
+                            "navs.projectId": [
+                                1,
+                                2
+                            ]
+                        }
+                    }
+                },
+                "additionalIndexes": {},
+                "items": [],
+                "relations": []
+            }
+        },
+        "tables": {
+            "item_1": {
+                "projectId": 1,
+                "name": "cache",
+                "migrations": [
+                    {
+                        "migration": "/Users/timothyjustinoesch/Projects/rose-water/parl-genderwatch-report/backend/database/migrations/0001_01_01_000001_create_cache_table.php",
+                        "relativePath": "/database/migrations/0001_01_01_000001_create_cache_table.php",
+                        "migrationName": "0001_01_01_000001_create_cache_table",
+                        "datePrefix": "0001_01_01",
+                        "fullPrefix": "0001_01_01_000001",
+                        "createdTables": [
+                            "cache",
+                            "cache_locks"
+                        ],
+                        "changedTables": []
+                    }
+                ],
+                "oldNames": [],
+                "createdFromInterface": false,
+                "labelColumnId": null,
+                "schemaState": {
+                    "name": "cache",
+                    "oldNames": [],
+                    "migrations": [
+                        {
+                            "migration": "/Users/timothyjustinoesch/Projects/rose-water/parl-genderwatch-report/backend/database/migrations/0001_01_01_000001_create_cache_table.php",
+                            "relativePath": "/database/migrations/0001_01_01_000001_create_cache_table.php",
+                            "migrationName": "0001_01_01_000001_create_cache_table",
+                            "datePrefix": "0001_01_01",
+                            "fullPrefix": "0001_01_01_000001",
+                            "createdTables": [
+                                "cache",
+                                "cache_locks"
+                            ],
+                            "changedTables": []
+                        }
+                    ]
+                },
+                "id": 1,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08",
+                "positionX": 0,
+                "positionY": 0,
+                "sectionId": 2
+            },
+            "__tableData": {
+                "count": 9,
+                "lastPrimaryKey": 11,
+                "index": {
+                    "1": {
+                        "hasMany": {
+                            "columns.tableId": [
+                                1,
+                                2,
+                                3
+                            ],
+                            "indices.tableId": [
+                                1
+                            ]
+                        }
+                    },
+                    "2": {
+                        "hasMany": {
+                            "columns.tableId": [
+                                4,
+                                5,
+                                6
+                            ],
+                            "indices.tableId": [
+                                2
+                            ]
+                        }
+                    },
+                    "3": {
+                        "hasMany": {
+                            "columns.tableId": [
+                                7,
+                                8,
+                                9,
+                                10,
+                                11,
+                                12,
+                                13
+                            ]
+                        }
+                    },
+                    "4": {
+                        "hasMany": {
+                            "columns.tableId": [
+                                14,
+                                15,
+                                16,
+                                17,
+                                18,
+                                19,
+                                20,
+                                21,
+                                22,
+                                23
+                            ],
+                            "indices.tableId": [
+                                3
+                            ]
+                        }
+                    },
+                    "5": {
+                        "hasMany": {
+                            "columns.tableId": [
+                                24,
+                                25,
+                                26,
+                                27,
+                                28,
+                                29,
+                                30
+                            ]
+                        }
+                    },
+                    "6": {
+                        "hasMany": {
+                            "columns.tableId": [
+                                31,
+                                32,
+                                33
+                            ]
+                        }
+                    },
+                    "7": {
+                        "hasMany": {
+                            "columns.tableId": [
+                                34,
+                                35,
+                                36
+                            ],
+                            "indices.tableId": [
+                                4
+                            ]
+                        }
+                    },
+                    "8": {
+                        "hasMany": {
+                            "columns.tableId": [
+                                37,
+                                38,
+                                39,
+                                40,
+                                41,
+                                42
+                            ],
+                            "indices.tableId": [
+                                5
+                            ]
+                        }
+                    },
+                    "9": {
+                        "hasMany": {
+                            "columns.tableId": [
+                                43,
+                                44,
+                                45,
+                                46,
+                                47,
+                                48,
+                                49,
+                                50
+                            ],
+                            "models.tableId": [
+                                1
+                            ]
+                        }
+                    }
+                },
+                "additionalIndexes": {},
+                "items": [],
+                "relations": []
+            },
+            "item_2": {
+                "projectId": 1,
+                "name": "cache_locks",
+                "migrations": [
+                    {
+                        "migration": "/Users/timothyjustinoesch/Projects/rose-water/parl-genderwatch-report/backend/database/migrations/0001_01_01_000001_create_cache_table.php",
+                        "relativePath": "/database/migrations/0001_01_01_000001_create_cache_table.php",
+                        "migrationName": "0001_01_01_000001_create_cache_table",
+                        "datePrefix": "0001_01_01",
+                        "fullPrefix": "0001_01_01_000001",
+                        "createdTables": [
+                            "cache",
+                            "cache_locks"
+                        ],
+                        "changedTables": []
+                    }
+                ],
+                "oldNames": [],
+                "createdFromInterface": false,
+                "labelColumnId": null,
+                "schemaState": {
+                    "name": "cache_locks",
+                    "oldNames": [],
+                    "migrations": [
+                        {
+                            "migration": "/Users/timothyjustinoesch/Projects/rose-water/parl-genderwatch-report/backend/database/migrations/0001_01_01_000001_create_cache_table.php",
+                            "relativePath": "/database/migrations/0001_01_01_000001_create_cache_table.php",
+                            "migrationName": "0001_01_01_000001_create_cache_table",
+                            "datePrefix": "0001_01_01",
+                            "fullPrefix": "0001_01_01_000001",
+                            "createdTables": [
+                                "cache",
+                                "cache_locks"
+                            ],
+                            "changedTables": []
+                        }
+                    ]
+                },
+                "id": 2,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08",
+                "positionX": 0,
+                "positionY": 700,
+                "sectionId": 2
+            },
+            "item_3": {
+                "projectId": 1,
+                "name": "failed_jobs",
+                "migrations": [
+                    {
+                        "migration": "/Users/timothyjustinoesch/Projects/rose-water/parl-genderwatch-report/backend/database/migrations/0001_01_01_000002_create_jobs_table.php",
+                        "relativePath": "/database/migrations/0001_01_01_000002_create_jobs_table.php",
+                        "migrationName": "0001_01_01_000002_create_jobs_table",
+                        "datePrefix": "0001_01_01",
+                        "fullPrefix": "0001_01_01_000002",
+                        "createdTables": [
+                            "jobs",
+                            "job_batches",
+                            "failed_jobs"
+                        ],
+                        "changedTables": []
+                    }
+                ],
+                "oldNames": [],
+                "createdFromInterface": false,
+                "labelColumnId": null,
+                "schemaState": {
+                    "name": "failed_jobs",
+                    "oldNames": [],
+                    "migrations": [
+                        {
+                            "migration": "/Users/timothyjustinoesch/Projects/rose-water/parl-genderwatch-report/backend/database/migrations/0001_01_01_000002_create_jobs_table.php",
+                            "relativePath": "/database/migrations/0001_01_01_000002_create_jobs_table.php",
+                            "migrationName": "0001_01_01_000002_create_jobs_table",
+                            "datePrefix": "0001_01_01",
+                            "fullPrefix": "0001_01_01_000002",
+                            "createdTables": [
+                                "jobs",
+                                "job_batches",
+                                "failed_jobs"
+                            ],
+                            "changedTables": []
+                        }
+                    ]
+                },
+                "id": 3,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08",
+                "positionX": 495,
+                "positionY": 495,
+                "sectionId": 2
+            },
+            "item_4": {
+                "projectId": 1,
+                "name": "job_batches",
+                "migrations": [
+                    {
+                        "migration": "/Users/timothyjustinoesch/Projects/rose-water/parl-genderwatch-report/backend/database/migrations/0001_01_01_000002_create_jobs_table.php",
+                        "relativePath": "/database/migrations/0001_01_01_000002_create_jobs_table.php",
+                        "migrationName": "0001_01_01_000002_create_jobs_table",
+                        "datePrefix": "0001_01_01",
+                        "fullPrefix": "0001_01_01_000002",
+                        "createdTables": [
+                            "jobs",
+                            "job_batches",
+                            "failed_jobs"
+                        ],
+                        "changedTables": []
+                    }
+                ],
+                "oldNames": [],
+                "createdFromInterface": false,
+                "labelColumnId": null,
+                "schemaState": {
+                    "name": "job_batches",
+                    "oldNames": [],
+                    "migrations": [
+                        {
+                            "migration": "/Users/timothyjustinoesch/Projects/rose-water/parl-genderwatch-report/backend/database/migrations/0001_01_01_000002_create_jobs_table.php",
+                            "relativePath": "/database/migrations/0001_01_01_000002_create_jobs_table.php",
+                            "migrationName": "0001_01_01_000002_create_jobs_table",
+                            "datePrefix": "0001_01_01",
+                            "fullPrefix": "0001_01_01_000002",
+                            "createdTables": [
+                                "jobs",
+                                "job_batches",
+                                "failed_jobs"
+                            ],
+                            "changedTables": []
+                        }
+                    ]
+                },
+                "id": 4,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08",
+                "positionX": 700,
+                "positionY": 0,
+                "sectionId": 2
+            },
+            "item_5": {
+                "projectId": 1,
+                "name": "jobs",
+                "migrations": [
+                    {
+                        "migration": "/Users/timothyjustinoesch/Projects/rose-water/parl-genderwatch-report/backend/database/migrations/0001_01_01_000002_create_jobs_table.php",
+                        "relativePath": "/database/migrations/0001_01_01_000002_create_jobs_table.php",
+                        "migrationName": "0001_01_01_000002_create_jobs_table",
+                        "datePrefix": "0001_01_01",
+                        "fullPrefix": "0001_01_01_000002",
+                        "createdTables": [
+                            "jobs",
+                            "job_batches",
+                            "failed_jobs"
+                        ],
+                        "changedTables": []
+                    }
+                ],
+                "oldNames": [],
+                "createdFromInterface": false,
+                "labelColumnId": null,
+                "schemaState": {
+                    "name": "jobs",
+                    "oldNames": [],
+                    "migrations": [
+                        {
+                            "migration": "/Users/timothyjustinoesch/Projects/rose-water/parl-genderwatch-report/backend/database/migrations/0001_01_01_000002_create_jobs_table.php",
+                            "relativePath": "/database/migrations/0001_01_01_000002_create_jobs_table.php",
+                            "migrationName": "0001_01_01_000002_create_jobs_table",
+                            "datePrefix": "0001_01_01",
+                            "fullPrefix": "0001_01_01_000002",
+                            "createdTables": [
+                                "jobs",
+                                "job_batches",
+                                "failed_jobs"
+                            ],
+                            "changedTables": []
+                        }
+                    ]
+                },
+                "id": 5,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08",
+                "positionX": 495,
+                "positionY": -495,
+                "sectionId": 2
+            },
+            "item_6": {
+                "projectId": 1,
+                "name": "migrations",
+                "migrations": [],
+                "oldNames": [],
+                "createdFromInterface": false,
+                "labelColumnId": null,
+                "schemaState": {
+                    "name": "migrations",
+                    "oldNames": [],
+                    "migrations": []
+                },
+                "id": 6,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08",
+                "positionX": 0,
+                "positionY": -700,
+                "sectionId": 2
+            },
+            "item_7": {
+                "projectId": 1,
+                "name": "password_reset_tokens",
+                "migrations": [
+                    {
+                        "migration": "/Users/timothyjustinoesch/Projects/rose-water/parl-genderwatch-report/backend/database/migrations/0001_01_01_000000_create_users_table.php",
+                        "relativePath": "/database/migrations/0001_01_01_000000_create_users_table.php",
+                        "migrationName": "0001_01_01_000000_create_users_table",
+                        "datePrefix": "0001_01_01",
+                        "fullPrefix": "0001_01_01_000000",
+                        "createdTables": [
+                            "users",
+                            "password_reset_tokens",
+                            "sessions"
+                        ],
+                        "changedTables": []
+                    }
+                ],
+                "oldNames": [],
+                "createdFromInterface": false,
+                "labelColumnId": null,
+                "schemaState": {
+                    "name": "password_reset_tokens",
+                    "oldNames": [],
+                    "migrations": [
+                        {
+                            "migration": "/Users/timothyjustinoesch/Projects/rose-water/parl-genderwatch-report/backend/database/migrations/0001_01_01_000000_create_users_table.php",
+                            "relativePath": "/database/migrations/0001_01_01_000000_create_users_table.php",
+                            "migrationName": "0001_01_01_000000_create_users_table",
+                            "datePrefix": "0001_01_01",
+                            "fullPrefix": "0001_01_01_000000",
+                            "createdTables": [
+                                "users",
+                                "password_reset_tokens",
+                                "sessions"
+                            ],
+                            "changedTables": []
+                        }
+                    ]
+                },
+                "id": 7,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08",
+                "positionX": -495,
+                "positionY": -495,
+                "sectionId": 2
+            },
+            "item_8": {
+                "projectId": 1,
+                "name": "sessions",
+                "migrations": [
+                    {
+                        "migration": "/Users/timothyjustinoesch/Projects/rose-water/parl-genderwatch-report/backend/database/migrations/0001_01_01_000000_create_users_table.php",
+                        "relativePath": "/database/migrations/0001_01_01_000000_create_users_table.php",
+                        "migrationName": "0001_01_01_000000_create_users_table",
+                        "datePrefix": "0001_01_01",
+                        "fullPrefix": "0001_01_01_000000",
+                        "createdTables": [
+                            "users",
+                            "password_reset_tokens",
+                            "sessions"
+                        ],
+                        "changedTables": []
+                    }
+                ],
+                "oldNames": [],
+                "createdFromInterface": false,
+                "labelColumnId": null,
+                "schemaState": {
+                    "name": "sessions",
+                    "oldNames": [],
+                    "migrations": [
+                        {
+                            "migration": "/Users/timothyjustinoesch/Projects/rose-water/parl-genderwatch-report/backend/database/migrations/0001_01_01_000000_create_users_table.php",
+                            "relativePath": "/database/migrations/0001_01_01_000000_create_users_table.php",
+                            "migrationName": "0001_01_01_000000_create_users_table",
+                            "datePrefix": "0001_01_01",
+                            "fullPrefix": "0001_01_01_000000",
+                            "createdTables": [
+                                "users",
+                                "password_reset_tokens",
+                                "sessions"
+                            ],
+                            "changedTables": []
+                        }
+                    ]
+                },
+                "id": 8,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08",
+                "positionX": -700,
+                "positionY": 0,
+                "sectionId": 2
+            },
+            "item_9": {
+                "projectId": 1,
+                "name": "users",
+                "migrations": [
+                    {
+                        "migration": "/Users/timothyjustinoesch/Projects/rose-water/parl-genderwatch-report/backend/database/migrations/0001_01_01_000000_create_users_table.php",
+                        "relativePath": "/database/migrations/0001_01_01_000000_create_users_table.php",
+                        "migrationName": "0001_01_01_000000_create_users_table",
+                        "datePrefix": "0001_01_01",
+                        "fullPrefix": "0001_01_01_000000",
+                        "createdTables": [
+                            "users",
+                            "password_reset_tokens",
+                            "sessions"
+                        ],
+                        "changedTables": []
+                    }
+                ],
+                "oldNames": [],
+                "createdFromInterface": false,
+                "labelColumnId": 44,
+                "schemaState": {
+                    "name": "users",
+                    "oldNames": [],
+                    "migrations": [
+                        {
+                            "migration": "/Users/timothyjustinoesch/Projects/rose-water/parl-genderwatch-report/backend/database/migrations/0001_01_01_000000_create_users_table.php",
+                            "relativePath": "/database/migrations/0001_01_01_000000_create_users_table.php",
+                            "migrationName": "0001_01_01_000000_create_users_table",
+                            "datePrefix": "0001_01_01",
+                            "fullPrefix": "0001_01_01_000000",
+                            "createdTables": [
+                                "users",
+                                "password_reset_tokens",
+                                "sessions"
+                            ],
+                            "changedTables": []
+                        }
+                    ]
+                },
+                "id": 9,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 12:00:25",
+                "positionX": 0,
+                "positionY": 0,
+                "sectionId": 1
+            }
+        },
+        "columns": {
+            "item_1": {
+                "name": "key",
+                "type": "string",
+                "index": true,
+                "length": null,
+                "unique": false,
+                "tableId": 1,
+                "removed": false,
+                "schemaState": {
+                    "name": "key",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "string",
+                    "index": true,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->text({LENGTH})",
+                "order": 0,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 1,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "__tableData": {
+                "count": 50,
+                "lastPrimaryKey": 56,
+                "index": {
+                    "1": {
+                        "hasMany": {
+                            "index_column.columnId": [
+                                1
+                            ]
+                        }
+                    },
+                    "2": {
+                        "hasMany": {}
+                    },
+                    "3": {
+                        "hasMany": {}
+                    },
+                    "4": {
+                        "hasMany": {
+                            "index_column.columnId": [
+                                2
+                            ]
+                        }
+                    },
+                    "5": {
+                        "hasMany": {}
+                    },
+                    "6": {
+                        "hasMany": {}
+                    },
+                    "7": {
+                        "hasMany": {}
+                    },
+                    "8": {
+                        "hasMany": {}
+                    },
+                    "9": {
+                        "hasMany": {}
+                    },
+                    "10": {
+                        "hasMany": {}
+                    },
+                    "11": {
+                        "hasMany": {}
+                    },
+                    "12": {
+                        "hasMany": {}
+                    },
+                    "13": {
+                        "hasMany": {}
+                    },
+                    "14": {
+                        "hasMany": {
+                            "index_column.columnId": [
+                                3
+                            ]
+                        }
+                    },
+                    "15": {
+                        "hasMany": {}
+                    },
+                    "16": {
+                        "hasMany": {}
+                    },
+                    "17": {
+                        "hasMany": {}
+                    },
+                    "18": {
+                        "hasMany": {}
+                    },
+                    "19": {
+                        "hasMany": {}
+                    },
+                    "20": {
+                        "hasMany": {}
+                    },
+                    "21": {
+                        "hasMany": {}
+                    },
+                    "22": {
+                        "hasMany": {}
+                    },
+                    "23": {
+                        "hasMany": {}
+                    },
+                    "24": {
+                        "hasMany": {}
+                    },
+                    "25": {
+                        "hasMany": {}
+                    },
+                    "26": {
+                        "hasMany": {}
+                    },
+                    "27": {
+                        "hasMany": {}
+                    },
+                    "28": {
+                        "hasMany": {}
+                    },
+                    "29": {
+                        "hasMany": {}
+                    },
+                    "30": {
+                        "hasMany": {}
+                    },
+                    "31": {
+                        "hasMany": {}
+                    },
+                    "32": {
+                        "hasMany": {}
+                    },
+                    "33": {
+                        "hasMany": {}
+                    },
+                    "34": {
+                        "hasMany": {
+                            "index_column.columnId": [
+                                4
+                            ]
+                        }
+                    },
+                    "35": {
+                        "hasMany": {}
+                    },
+                    "36": {
+                        "hasMany": {}
+                    },
+                    "37": {
+                        "hasMany": {
+                            "index_column.columnId": [
+                                5
+                            ]
+                        }
+                    },
+                    "38": {
+                        "hasMany": {}
+                    },
+                    "39": {
+                        "hasMany": {}
+                    },
+                    "40": {
+                        "hasMany": {}
+                    },
+                    "41": {
+                        "hasMany": {}
+                    },
+                    "42": {
+                        "hasMany": {}
+                    },
+                    "43": {
+                        "hasMany": {}
+                    },
+                    "44": {
+                        "hasMany": {
+                            "fillable_model_column.columnId": [
+                                1
+                            ],
+                            "tables.labelColumnId": [
+                                9
+                            ]
+                        }
+                    },
+                    "45": {
+                        "hasMany": {
+                            "fillable_model_column.columnId": [
+                                2
+                            ]
+                        }
+                    },
+                    "46": {
+                        "hasMany": {
+                            "casts_model_column.columnId": [
+                                1
+                            ]
+                        }
+                    },
+                    "47": {
+                        "hasMany": {
+                            "fillable_model_column.columnId": [
+                                3
+                            ],
+                            "hidden_model_column.columnId": [
+                                1
+                            ],
+                            "casts_model_column.columnId": [
+                                2
+                            ]
+                        }
+                    },
+                    "48": {
+                        "hasMany": {
+                            "hidden_model_column.columnId": [
+                                2
+                            ]
+                        }
+                    },
+                    "49": {
+                        "hasMany": {}
+                    },
+                    "50": {
+                        "hasMany": {}
+                    }
+                },
+                "additionalIndexes": {},
+                "items": [],
+                "relations": []
+            },
+            "item_2": {
+                "name": "value",
+                "type": "text",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 1,
+                "removed": false,
+                "schemaState": {
+                    "name": "value",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "text",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->text()",
+                "order": 1,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 2,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_3": {
+                "name": "expiration",
+                "type": "integer",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 1,
+                "removed": false,
+                "schemaState": {
+                    "name": "expiration",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "integer",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->randomNumber(0)",
+                "order": 2,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 3,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_4": {
+                "name": "key",
+                "type": "string",
+                "index": true,
+                "length": null,
+                "unique": false,
+                "tableId": 2,
+                "removed": false,
+                "schemaState": {
+                    "name": "key",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "string",
+                    "index": true,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->text({LENGTH})",
+                "order": 0,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 4,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_5": {
+                "name": "owner",
+                "type": "string",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 2,
+                "removed": false,
+                "schemaState": {
+                    "name": "owner",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "string",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->text({LENGTH})",
+                "order": 1,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 5,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_6": {
+                "name": "expiration",
+                "type": "integer",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 2,
+                "removed": false,
+                "schemaState": {
+                    "name": "expiration",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "integer",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->randomNumber(0)",
+                "order": 2,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 6,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_7": {
+                "name": "id",
+                "type": "integer",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 3,
+                "removed": false,
+                "schemaState": {
+                    "name": "id",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": true,
+                    "autoIncrement": true,
+                    "type": "integer",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": true,
+                "default": null,
+                "autoIncrement": true,
+                "order": 0,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 7,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_8": {
+                "name": "uuid",
+                "type": "string",
+                "index": false,
+                "length": null,
+                "unique": true,
+                "tableId": 3,
+                "removed": false,
+                "schemaState": {
+                    "name": "uuid",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "string",
+                    "index": false,
+                    "unique": true,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->uuid()",
+                "order": 1,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 8,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_9": {
+                "name": "connection",
+                "type": "text",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 3,
+                "removed": false,
+                "schemaState": {
+                    "name": "connection",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "text",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->text()",
+                "order": 2,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 9,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_10": {
+                "name": "queue",
+                "type": "text",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 3,
+                "removed": false,
+                "schemaState": {
+                    "name": "queue",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "text",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->text()",
+                "order": 3,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 10,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_11": {
+                "name": "payload",
+                "type": "text",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 3,
+                "removed": false,
+                "schemaState": {
+                    "name": "payload",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "text",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->text()",
+                "order": 4,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 11,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_12": {
+                "name": "exception",
+                "type": "text",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 3,
+                "removed": false,
+                "schemaState": {
+                    "name": "exception",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "text",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->text()",
+                "order": 5,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 12,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_13": {
+                "name": "failed_at",
+                "type": "timestamp",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 3,
+                "removed": false,
+                "schemaState": {
+                    "name": "failed_at",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "timestamp",
+                    "index": false,
+                    "unique": false,
+                    "default": "CURRENT_TIMESTAMP",
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": "CURRENT_TIMESTAMP",
+                "autoIncrement": false,
+                "faker": "fake()->dateTime()",
+                "order": 6,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 13,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_14": {
+                "name": "id",
+                "type": "string",
+                "index": true,
+                "length": null,
+                "unique": false,
+                "tableId": 4,
+                "removed": false,
+                "schemaState": {
+                    "name": "id",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "string",
+                    "index": true,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "order": 0,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 14,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_15": {
+                "name": "name",
+                "type": "string",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 4,
+                "removed": false,
+                "schemaState": {
+                    "name": "name",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "string",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->name()",
+                "order": 1,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 15,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_16": {
+                "name": "total_jobs",
+                "type": "integer",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 4,
+                "removed": false,
+                "schemaState": {
+                    "name": "total_jobs",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "integer",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->randomNumber(0)",
+                "order": 2,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 16,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_17": {
+                "name": "pending_jobs",
+                "type": "integer",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 4,
+                "removed": false,
+                "schemaState": {
+                    "name": "pending_jobs",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "integer",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->randomNumber(0)",
+                "order": 3,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 17,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_18": {
+                "name": "failed_jobs",
+                "type": "integer",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 4,
+                "removed": false,
+                "schemaState": {
+                    "name": "failed_jobs",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "integer",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->randomNumber(0)",
+                "order": 4,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 18,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_19": {
+                "name": "failed_job_ids",
+                "type": "text",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 4,
+                "removed": false,
+                "schemaState": {
+                    "name": "failed_job_ids",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "text",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->text()",
+                "order": 5,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 19,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_20": {
+                "name": "options",
+                "type": "text",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 4,
+                "removed": false,
+                "schemaState": {
+                    "name": "options",
+                    "length": null,
+                    "nullable": true,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "text",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": true,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "[]",
+                "order": 6,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 20,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_21": {
+                "name": "cancelled_at",
+                "type": "integer",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 4,
+                "removed": false,
+                "schemaState": {
+                    "name": "cancelled_at",
+                    "length": null,
+                    "nullable": true,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "integer",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": true,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->randomNumber(0)",
+                "order": 7,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 21,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_22": {
+                "name": "created_at",
+                "type": "integer",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 4,
+                "removed": false,
+                "schemaState": {
+                    "name": "created_at",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "integer",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->dateTime()",
+                "order": 8,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 22,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_23": {
+                "name": "finished_at",
+                "type": "integer",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 4,
+                "removed": false,
+                "schemaState": {
+                    "name": "finished_at",
+                    "length": null,
+                    "nullable": true,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "integer",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": true,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->randomNumber(0)",
+                "order": 9,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 23,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_24": {
+                "name": "id",
+                "type": "integer",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 5,
+                "removed": false,
+                "schemaState": {
+                    "name": "id",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": true,
+                    "autoIncrement": true,
+                    "type": "integer",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": true,
+                "default": null,
+                "autoIncrement": true,
+                "order": 0,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 24,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_25": {
+                "name": "queue",
+                "type": "string",
+                "index": true,
+                "length": null,
+                "unique": false,
+                "tableId": 5,
+                "removed": false,
+                "schemaState": {
+                    "name": "queue",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "string",
+                    "index": true,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->text({LENGTH})",
+                "order": 1,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 25,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_26": {
+                "name": "payload",
+                "type": "text",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 5,
+                "removed": false,
+                "schemaState": {
+                    "name": "payload",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "text",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->text()",
+                "order": 2,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 26,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_27": {
+                "name": "attempts",
+                "type": "integer",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 5,
+                "removed": false,
+                "schemaState": {
+                    "name": "attempts",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "integer",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->randomNumber(0)",
+                "order": 3,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 27,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_28": {
+                "name": "reserved_at",
+                "type": "integer",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 5,
+                "removed": false,
+                "schemaState": {
+                    "name": "reserved_at",
+                    "length": null,
+                    "nullable": true,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "integer",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": true,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->randomNumber(0)",
+                "order": 4,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 28,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_29": {
+                "name": "available_at",
+                "type": "integer",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 5,
+                "removed": false,
+                "schemaState": {
+                    "name": "available_at",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "integer",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->randomNumber(0)",
+                "order": 5,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 29,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_30": {
+                "name": "created_at",
+                "type": "integer",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 5,
+                "removed": false,
+                "schemaState": {
+                    "name": "created_at",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "integer",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->dateTime()",
+                "order": 6,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 30,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_31": {
+                "name": "id",
+                "type": "integer",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 6,
+                "removed": false,
+                "schemaState": {
+                    "name": "id",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": true,
+                    "autoIncrement": true,
+                    "type": "integer",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": true,
+                "default": null,
+                "autoIncrement": true,
+                "order": 0,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 31,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_32": {
+                "name": "migration",
+                "type": "string",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 6,
+                "removed": false,
+                "schemaState": {
+                    "name": "migration",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "string",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->text({LENGTH})",
+                "order": 1,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 32,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_33": {
+                "name": "batch",
+                "type": "integer",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 6,
+                "removed": false,
+                "schemaState": {
+                    "name": "batch",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "integer",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->randomNumber(0)",
+                "order": 2,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 33,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_34": {
+                "name": "email",
+                "type": "string",
+                "index": true,
+                "length": null,
+                "unique": false,
+                "tableId": 7,
+                "removed": false,
+                "schemaState": {
+                    "name": "email",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "string",
+                    "index": true,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->unique()->safeEmail()",
+                "order": 0,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 34,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_35": {
+                "name": "token",
+                "type": "string",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 7,
+                "removed": false,
+                "schemaState": {
+                    "name": "token",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "string",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->text({LENGTH})",
+                "order": 1,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 35,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_36": {
+                "name": "created_at",
+                "type": "dateTime",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 7,
+                "removed": false,
+                "schemaState": {
+                    "name": "created_at",
+                    "length": null,
+                    "nullable": true,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "dateTime",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": true,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->dateTime()",
+                "order": 2,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 36,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_37": {
+                "name": "id",
+                "type": "string",
+                "index": true,
+                "length": null,
+                "unique": false,
+                "tableId": 8,
+                "removed": false,
+                "schemaState": {
+                    "name": "id",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "string",
+                    "index": true,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "order": 0,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 37,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_38": {
+                "name": "user_id",
+                "type": "integer",
+                "index": true,
+                "length": null,
+                "unique": false,
+                "tableId": 8,
+                "removed": false,
+                "schemaState": {
+                    "name": "user_id",
+                    "length": null,
+                    "nullable": true,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "integer",
+                    "index": true,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": true,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->randomNumber(0)",
+                "order": 1,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 38,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_39": {
+                "name": "ip_address",
+                "type": "string",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 8,
+                "removed": false,
+                "schemaState": {
+                    "name": "ip_address",
+                    "length": null,
+                    "nullable": true,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "string",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": true,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->ipv4()",
+                "order": 2,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 39,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_40": {
+                "name": "user_agent",
+                "type": "text",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 8,
+                "removed": false,
+                "schemaState": {
+                    "name": "user_agent",
+                    "length": null,
+                    "nullable": true,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "text",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": true,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->userAgent()",
+                "order": 3,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 40,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_41": {
+                "name": "payload",
+                "type": "text",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 8,
+                "removed": false,
+                "schemaState": {
+                    "name": "payload",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "text",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->text()",
+                "order": 4,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 41,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_42": {
+                "name": "last_activity",
+                "type": "integer",
+                "index": true,
+                "length": null,
+                "unique": false,
+                "tableId": 8,
+                "removed": false,
+                "schemaState": {
+                    "name": "last_activity",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "integer",
+                    "index": true,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->randomNumber(0)",
+                "order": 5,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 42,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_43": {
+                "name": "id",
+                "type": "integer",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 9,
+                "removed": false,
+                "schemaState": {
+                    "name": "id",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": true,
+                    "autoIncrement": true,
+                    "type": "integer",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": true,
+                "default": null,
+                "autoIncrement": true,
+                "order": 0,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 43,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_44": {
+                "name": "name",
+                "type": "string",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 9,
+                "removed": false,
+                "schemaState": {
+                    "name": "name",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "string",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->name()",
+                "order": 1,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 44,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_45": {
+                "name": "email",
+                "type": "string",
+                "index": false,
+                "length": null,
+                "unique": true,
+                "tableId": 9,
+                "removed": false,
+                "schemaState": {
+                    "name": "email",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "string",
+                    "index": false,
+                    "unique": true,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->unique()->safeEmail()",
+                "order": 2,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 45,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_46": {
+                "name": "email_verified_at",
+                "type": "dateTime",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 9,
+                "removed": false,
+                "schemaState": {
+                    "name": "email_verified_at",
+                    "length": null,
+                    "nullable": true,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "dateTime",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": true,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "now()",
+                "order": 3,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 46,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_47": {
+                "name": "password",
+                "type": "string",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 9,
+                "removed": false,
+                "schemaState": {
+                    "name": "password",
+                    "length": null,
+                    "nullable": false,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "string",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": false,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "\\Hash::make('password')",
+                "order": 4,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 47,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_48": {
+                "name": "remember_token",
+                "type": "string",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 9,
+                "removed": false,
+                "schemaState": {
+                    "name": "remember_token",
+                    "length": null,
+                    "nullable": true,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "string",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": true,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "Str::random(10)",
+                "order": 5,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 48,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_49": {
+                "name": "created_at",
+                "type": "dateTime",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 9,
+                "removed": false,
+                "schemaState": {
+                    "name": "created_at",
+                    "length": null,
+                    "nullable": true,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "dateTime",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": true,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->dateTime()",
+                "order": 6,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 49,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_50": {
+                "name": "updated_at",
+                "type": "dateTime",
+                "index": false,
+                "length": null,
+                "unique": false,
+                "tableId": 9,
+                "removed": false,
+                "schemaState": {
+                    "name": "updated_at",
+                    "length": null,
+                    "nullable": true,
+                    "unsigned": false,
+                    "autoIncrement": false,
+                    "type": "dateTime",
+                    "index": false,
+                    "unique": false,
+                    "default": null,
+                    "total": null,
+                    "places": null,
+                    "options": []
+                },
+                "nullable": true,
+                "unsigned": false,
+                "default": null,
+                "autoIncrement": false,
+                "faker": "fake()->dateTime()",
+                "order": 7,
+                "total": null,
+                "places": null,
+                "options": [],
+                "id": 50,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            }
+        },
+        "indices": {
+            "item_1": {
+                "tableId": 1,
+                "name": "",
+                "columns": [
+                    "key"
+                ],
+                "algorithm": null,
+                "type": "primary",
+                "on": null,
+                "references": null,
+                "onUpdate": null,
+                "onDelete": null,
+                "schemaState": {
+                    "name": "",
+                    "columns": [
+                        "key"
+                    ],
+                    "algorithm": null,
+                    "type": "primary",
+                    "on": null,
+                    "references": null,
+                    "onUpdate": null,
+                    "onDelete": null
+                },
+                "id": 1,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "__tableData": {
+                "count": 5,
+                "lastPrimaryKey": 5,
+                "index": {
+                    "1": {
+                        "hasMany": {
+                            "index_column.indexId": [
+                                1
+                            ]
+                        }
+                    },
+                    "2": {
+                        "hasMany": {
+                            "index_column.indexId": [
+                                2
+                            ]
+                        }
+                    },
+                    "3": {
+                        "hasMany": {
+                            "index_column.indexId": [
+                                3
+                            ]
+                        }
+                    },
+                    "4": {
+                        "hasMany": {
+                            "index_column.indexId": [
+                                4
+                            ]
+                        }
+                    },
+                    "5": {
+                        "hasMany": {
+                            "index_column.indexId": [
+                                5
+                            ]
+                        }
+                    }
+                },
+                "additionalIndexes": {},
+                "items": [],
+                "relations": []
+            },
+            "item_2": {
+                "tableId": 2,
+                "name": "",
+                "columns": [
+                    "key"
+                ],
+                "algorithm": null,
+                "type": "primary",
+                "on": null,
+                "references": null,
+                "onUpdate": null,
+                "onDelete": null,
+                "schemaState": {
+                    "name": "",
+                    "columns": [
+                        "key"
+                    ],
+                    "algorithm": null,
+                    "type": "primary",
+                    "on": null,
+                    "references": null,
+                    "onUpdate": null,
+                    "onDelete": null
+                },
+                "id": 2,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_3": {
+                "tableId": 4,
+                "name": "",
+                "columns": [
+                    "id"
+                ],
+                "algorithm": null,
+                "type": "primary",
+                "on": null,
+                "references": null,
+                "onUpdate": null,
+                "onDelete": null,
+                "schemaState": {
+                    "name": "",
+                    "columns": [
+                        "id"
+                    ],
+                    "algorithm": null,
+                    "type": "primary",
+                    "on": null,
+                    "references": null,
+                    "onUpdate": null,
+                    "onDelete": null
+                },
+                "id": 3,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_4": {
+                "tableId": 7,
+                "name": "",
+                "columns": [
+                    "email"
+                ],
+                "algorithm": null,
+                "type": "primary",
+                "on": null,
+                "references": null,
+                "onUpdate": null,
+                "onDelete": null,
+                "schemaState": {
+                    "name": "",
+                    "columns": [
+                        "email"
+                    ],
+                    "algorithm": null,
+                    "type": "primary",
+                    "on": null,
+                    "references": null,
+                    "onUpdate": null,
+                    "onDelete": null
+                },
+                "id": 4,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_5": {
+                "tableId": 8,
+                "name": "",
+                "columns": [
+                    "id"
+                ],
+                "algorithm": null,
+                "type": "primary",
+                "on": null,
+                "references": null,
+                "onUpdate": null,
+                "onDelete": null,
+                "schemaState": {
+                    "name": "",
+                    "columns": [
+                        "id"
+                    ],
+                    "algorithm": null,
+                    "type": "primary",
+                    "on": null,
+                    "references": null,
+                    "onUpdate": null,
+                    "onDelete": null
+                },
+                "id": 5,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            }
+        },
+        "index_column": {
+            "item_1": {
+                "indexId": 1,
+                "columnId": 1,
+                "id": 1,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "__tableData": {
+                "count": 5,
+                "lastPrimaryKey": 5,
+                "index": {
+                    "1": {
+                        "hasMany": {}
+                    },
+                    "2": {
+                        "hasMany": {}
+                    },
+                    "3": {
+                        "hasMany": {}
+                    },
+                    "4": {
+                        "hasMany": {}
+                    },
+                    "5": {
+                        "hasMany": {}
+                    }
+                },
+                "additionalIndexes": {},
+                "items": [],
+                "relations": []
+            },
+            "item_2": {
+                "indexId": 2,
+                "columnId": 4,
+                "id": 2,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_3": {
+                "indexId": 3,
+                "columnId": 14,
+                "id": 3,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_4": {
+                "indexId": 4,
+                "columnId": 34,
+                "id": 4,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_5": {
+                "indexId": 5,
+                "columnId": 37,
+                "id": 5,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            }
+        },
+        "models": {
+            "item_1": {
+                "projectId": 1,
+                "name": "User",
+                "fileName": "User.php",
+                "tableName": "users",
+                "class": "App\\Models\\User",
+                "namespace": "App\\Models",
+                "path": "Models/User.php",
+                "casts": {
+                    "email_verified_at": "datetime",
+                    "password": "hashed"
+                },
+                "fillable": [
+                    "name",
+                    "email",
+                    "password"
+                ],
+                "guarded": [
+                    "*"
+                ],
+                "dates": [],
+                "hidden": [
+                    "password",
+                    "remember_token"
+                ],
+                "appends": [],
+                "methods": [],
+                "createdFromInterface": false,
+                "parentClass": "Illuminate\\Foundation\\Auth\\User as Authenticatable",
+                "interfaces": [],
+                "traits": [
+                    "Illuminate\\Database\\Eloquent\\Factories\\HasFactory",
+                    "Illuminate\\Notifications\\Notifiable"
+                ],
+                "allImports": [
+                    "Illuminate\\Contracts\\Auth\\MustVerifyEmail",
+                    "Illuminate\\Database\\Eloquent\\Factories\\HasFactory",
+                    "Illuminate\\Foundation\\Auth\\User as Authenticatable",
+                    "Illuminate\\Notifications\\Notifiable"
+                ],
+                "hasGuarded": false,
+                "hasFillable": true,
+                "hasTimestamps": true,
+                "hasSoftDeletes": false,
+                "isAuthenticatable": true,
+                "schemaState": {
+                    "name": "User",
+                    "fileName": "User.php",
+                    "tableName": "users",
+                    "class": "App\\Models\\User",
+                    "namespace": "App\\Models",
+                    "path": "Models/User.php",
+                    "casts": {
+                        "email_verified_at": "datetime",
+                        "password": "hashed"
+                    },
+                    "fillable": [
+                        "name",
+                        "email",
+                        "password"
+                    ],
+                    "guarded": [
+                        "*"
+                    ],
+                    "dates": [],
+                    "hidden": [
+                        "password",
+                        "remember_token"
+                    ],
+                    "appends": [],
+                    "methods": [],
+                    "parentClass": "Illuminate\\Foundation\\Auth\\User as Authenticatable",
+                    "interfaces": [],
+                    "traits": [
+                        "Illuminate\\Database\\Eloquent\\Factories\\HasFactory",
+                        "Illuminate\\Notifications\\Notifiable"
+                    ],
+                    "allImports": [
+                        "Illuminate\\Contracts\\Auth\\MustVerifyEmail",
+                        "Illuminate\\Database\\Eloquent\\Factories\\HasFactory",
+                        "Illuminate\\Foundation\\Auth\\User as Authenticatable",
+                        "Illuminate\\Notifications\\Notifiable"
+                    ],
+                    "hasGuarded": false,
+                    "hasFillable": true,
+                    "hasTimestamps": true,
+                    "hasSoftDeletes": false,
+                    "isAuthenticatable": true
+                },
+                "id": 1,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08",
+                "plural": "Users",
+                "pluralAndSingularAreSame": false,
+                "tableId": 9,
+                "callSeeder": false,
+                "seederQuantity": 5,
+                "attributesComments": true,
+                "methodsComments": true
+            },
+            "__tableData": {
+                "count": 1,
+                "lastPrimaryKey": 3,
+                "index": {
+                    "1": {
+                        "hasMany": {
+                            "fillable_model_column.modelId": [
+                                1,
+                                2,
+                                3
+                            ],
+                            "hidden_model_column.modelId": [
+                                1,
+                                2
+                            ],
+                            "casts_model_column.modelId": [
+                                1,
+                                2
+                            ]
+                        }
+                    }
+                },
+                "additionalIndexes": {},
+                "items": [],
+                "relations": []
+            }
+        },
+        "fillable_model_column": {
+            "item_1": {
+                "modelId": 1,
+                "columnId": 44,
+                "id": 1,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "__tableData": {
+                "count": 3,
+                "lastPrimaryKey": 3,
+                "index": {
+                    "1": {
+                        "hasMany": {}
+                    },
+                    "2": {
+                        "hasMany": {}
+                    },
+                    "3": {
+                        "hasMany": {}
+                    }
+                },
+                "additionalIndexes": {},
+                "items": [],
+                "relations": []
+            },
+            "item_2": {
+                "modelId": 1,
+                "columnId": 45,
+                "id": 2,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_3": {
+                "modelId": 1,
+                "columnId": 47,
+                "id": 3,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            }
+        },
+        "hidden_model_column": {
+            "item_1": {
+                "modelId": 1,
+                "columnId": 47,
+                "id": 1,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "__tableData": {
+                "count": 2,
+                "lastPrimaryKey": 2,
+                "index": {
+                    "1": {
+                        "hasMany": {}
+                    },
+                    "2": {
+                        "hasMany": {}
+                    }
+                },
+                "additionalIndexes": {},
+                "items": [],
+                "relations": []
+            },
+            "item_2": {
+                "modelId": 1,
+                "columnId": 48,
+                "id": 2,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            }
+        },
+        "casts_model_column": {
+            "item_1": {
+                "modelId": 1,
+                "columnId": 46,
+                "id": 1,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08",
+                "type": "datetime"
+            },
+            "__tableData": {
+                "count": 2,
+                "lastPrimaryKey": 2,
+                "index": {
+                    "1": {
+                        "hasMany": {}
+                    },
+                    "2": {
+                        "hasMany": {}
+                    }
+                },
+                "additionalIndexes": {},
+                "items": [],
+                "relations": []
+            },
+            "item_2": {
+                "modelId": 1,
+                "columnId": 47,
+                "id": 2,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08",
+                "type": "hashed"
+            }
+        },
+        "app_sections": {
+            "item_1": {
+                "name": "Dashboard",
+                "routePrefix": "dashboard",
+                "routeBasePath": "dashboard",
+                "projectId": 1,
+                "requiresAuth": true,
+                "id": 1,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "__tableData": {
+                "count": 4,
+                "lastPrimaryKey": 4,
+                "index": {
+                    "1": {
+                        "hasMany": {}
+                    },
+                    "2": {
+                        "hasMany": {}
+                    },
+                    "3": {
+                        "hasMany": {}
+                    },
+                    "4": {
+                        "hasMany": {}
+                    }
+                },
+                "additionalIndexes": {},
+                "items": [],
+                "relations": []
+            },
+            "item_2": {
+                "name": "API",
+                "routePrefix": "api",
+                "routeBasePath": "api",
+                "projectId": 1,
+                "requiresAuth": true,
+                "id": 2,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_3": {
+                "name": "Site",
+                "routePrefix": "",
+                "routeBasePath": "",
+                "projectId": 1,
+                "requiresAuth": false,
+                "id": 3,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            },
+            "item_4": {
+                "name": "Filament Panel",
+                "routePrefix": "panel",
+                "routeBasePath": "panel",
+                "projectId": 1,
+                "requiresAuth": false,
+                "id": 4,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            }
+        },
+        "schema_sections": {
+            "item_1": {
+                "name": "App",
+                "scrollX": 24570,
+                "scrollY": 24474,
+                "zoom": 100,
+                "projectId": 1,
+                "id": 1,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 12:04:52"
+            },
+            "__tableData": {
+                "count": 2,
+                "lastPrimaryKey": 2,
+                "index": {
+                    "1": {
+                        "hasMany": {
+                            "tables.sectionId": [
+                                9
+                            ]
+                        }
+                    },
+                    "2": {
+                        "hasMany": {
+                            "tables.sectionId": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8
+                            ]
+                        }
+                    }
+                },
+                "additionalIndexes": {},
+                "items": [],
+                "relations": []
+            },
+            "item_2": {
+                "name": "Laravel",
+                "scrollX": 0,
+                "scrollY": 0,
+                "zoom": 100,
+                "projectId": 1,
+                "id": 2,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08"
+            }
+        },
+        "navs": {
+            "item_1": {
+                "projectId": 1,
+                "name": "navigation.home",
+                "id": 1,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08",
+                "tag": "home"
+            },
+            "__tableData": {
+                "count": 2,
+                "lastPrimaryKey": 2,
+                "index": {
+                    "1": {
+                        "hasMany": {}
+                    },
+                    "2": {
+                        "hasMany": {}
+                    }
+                },
+                "additionalIndexes": {},
+                "items": [],
+                "relations": []
+            },
+            "item_2": {
+                "projectId": 1,
+                "name": "navigation.apps",
+                "id": 2,
+                "createdAt": "2025-09-27 11:56:08",
+                "updatedAt": "2025-09-27 11:56:08",
+                "tag": "apps"
+            }
+        }
+    },
+    "tablesNames": [
+        "projects",
+        "tables",
+        "columns",
+        "indices",
+        "index_column",
+        "models",
+        "fillable_model_column",
+        "hidden_model_column",
+        "casts_model_column",
+        "app_sections",
+        "schema_sections",
+        "navs"
+    ]
+}
