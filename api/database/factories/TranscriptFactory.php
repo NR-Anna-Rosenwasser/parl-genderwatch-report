@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\;
 use App\Models\Council;
 use App\Models\Member;
 use App\Models\ParlSession;
@@ -31,7 +30,6 @@ class TranscriptFactory extends Factory
             'start' => fake()->dateTime(),
             'end' => fake()->dateTime(),
             'languageOfText' => fake()->word(),
-            'business_id' => ::factory(),
             'parl_session_id' => ParlSession::factory(),
             'council_id' => Council::factory(),
             'member_id' => Member::factory(),
