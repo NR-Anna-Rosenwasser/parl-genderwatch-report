@@ -123,4 +123,7 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    "aliases" => [
+        "Webservice" => App\Helpers\Webservice::class,
+    ],
 ];

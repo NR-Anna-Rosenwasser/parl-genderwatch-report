@@ -1,92 +1,107 @@
 models:
-  Session:
+  ParlSession:
     uuid: uuid
-    ExternalSessionId: string
-    SessionNumber: integer
-    SessionName: string
-    Abbreviation: string
-    StartDate: datetime
-    EndDate: datetime
-    Title: string
-    Type: integer
-    TypeName: string
-    Modified: datetime
-    LegislativePeriodNumber: integer
+    externalId: string
+    number: integer
+    name: string
+    abbreviation: string
+    startDate: datetime
+    endDate: datetime
+    title: string nullable
+    type: integer nullable
+    typeName: string nullable
+    modified: datetime
+    legislativePeriodNumber: integer
+    relationships:
+      - hasMany: Transcript
 
   Council:
     uuid: uuid
-    ExternalCouncilId: integer
-    CouncilName: string
-    CouncilAbbreviation: string
+    externalId: integer
+    name: string
+    abbreviation: string
+    relationships:
+      - hasMany: Member, Transcript
 
   Party:
     uuid: uuid
-    ExternalPartyId: integer
-    PartyName: string
-    PartyAbbreviation: string
+    externalId: integer
+    name: string
+    abbreviation: string
+    relationships:
+      - hasMany: Member
 
   ParlGroup:
     uuid: uuid
-    ExternalParlGroupId: integer
-    ParlGroupNumber: integer
-    IsActive: boolean
-    ParlGroupCode: string
-    ParlGroupName: string
-    ParlGroupAbbreviation: string
-    NameUsedSince: datetime
-    Modified: datetime
-    ParlGroupColour: string:8
+    externalId: integer
+    number: integer
+    isActive: boolean
+    code: string
+    name: string
+    abbreviation: string
+    nameUsedSince: datetime nullable
+    modified: datetime
+    colour: string:8 nullable
+    relationships:
+      - hasMany: Member
 
   Canton:
-    ExternalCantonId: integer
-    CantonNumber: integer
-    CantonName: string
-    CantonAbbreviation: string
+    externalId: integer
+    number: integer
+    name: string
+    abbreviation: string
+    relationships:
+      - hasMany: Member
 
   Member:
     uuid : uuid
-    ExternalMemberId: integer
-    ExternalPersonId: integer
-    IsActive: boolean
-    FirstName: string
-    LastName: string
-    GenderAsString: string
-    DateJoining: datetime
-    DateLeaving: datetime
-    DateElection: datetime
+    externalId: integer
+    externalPersonId: integer
+    isActive: boolean
+    firstName: string
+    lastName: string
+    genderAsString: string
+    dateJoining: datetime
+    dateLeaving: datetime nullable
+    dateElection: datetime
+    party_id: integer nullable
+    canton_id: integer nullable
     relationships:
       - belongsTo: Party, ParlGroup, Canton, Council
-      - belongsToMany: Session
+      - belongsToMany: ParlSession
 
   Business:
     uuid: uuid
-    ExternalBusinessId: integer
-    BusinessShortNumber: string
-    BusinessType: integer
-    BusinessTypeName: string
-    BusinessTypeAbbreviation: string
-    Title: string
-    Description: string
-    InitialSituation: string
+    externalId: integer
+    shortNumber: string
+    type: integer
+    typeName: string
+    typeAbbreviation: string
+    title: longText
+    description: longText nullable
     relationships:
-      - hasMany: Tag, Transcript
+      - hasMany: Transcript
+      - belongsToMany: Tag
 
   Tag:
     uuid: uuid
-    ExternalTagId: integer
-    TagName: string
+    ExternalId: integer
+    name: string
     relationships:
-      - belongsToMany: Business
+      - hasMany: Business
 
   Transcript:
     uuid: uuid
-    ExternalTranscriptId: integer
-    Text: string
-    Start: datetime
-    End: datetime
-    LanguageOfText: string
+    externalId: integer
+    text: longText
+    start: datetime
+    end: datetime
+    languageOfText: string
+    business_id: integer nullable
+    council_id: integer nullable
+    member_id: integer nullable
     relationships:
-      - belongsTo: Session, Council, Member, Business
+      - belongsTo: ParlSession, Council, Member, Business
 
 
 

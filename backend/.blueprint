@@ -1,2 +1,41 @@
+created:
+    - database/factories/ParlSessionFactory.php
+    - database/factories/CouncilFactory.php
+    - database/factories/PartyFactory.php
+    - database/factories/ParlGroupFactory.php
+    - database/factories/CantonFactory.php
+    - database/factories/MemberFactory.php
+    - database/factories/BusinessFactory.php
+    - database/factories/TagFactory.php
+    - database/factories/TranscriptFactory.php
+    - database/migrations/2025_09_28_065248_create_parl_sessions_table.php
+    - database/migrations/2025_09_28_065249_create_councils_table.php
+    - database/migrations/2025_09_28_065250_create_parties_table.php
+    - database/migrations/2025_09_28_065251_create_parl_groups_table.php
+    - database/migrations/2025_09_28_065252_create_cantons_table.php
+    - database/migrations/2025_09_28_065253_create_members_table.php
+    - database/migrations/2025_09_28_065254_create_businesses_table.php
+    - database/migrations/2025_09_28_065255_create_tags_table.php
+    - database/migrations/2025_09_28_065256_create_transcripts_table.php
+    - database/migrations/2025_09_28_065257_create_member_parl_session_table.php
+    - database/migrations/2025_09_28_065258_create_business_tag_table.php
+    - app/Models/ParlSession.php
+    - app/Models/Council.php
+    - app/Models/Party.php
+    - app/Models/ParlGroup.php
+    - app/Models/Canton.php
+    - app/Models/Member.php
+    - app/Models/Business.php
+    - app/Models/Tag.php
+    - app/Models/Transcript.php
 models:
     User: { name: string, email: string, email_verified_at: 'timestamp nullable default:NULL', password: string, remember_token: 'string:100 nullable default:NULL' }
+    ParlSession: { uuid: uuid, externalId: string, number: integer, name: string, abbreviation: string, startDate: datetime, endDate: datetime, title: 'string nullable', type: 'integer nullable', typeName: 'string nullable', modified: datetime, legislativePeriodNumber: integer, relationships: { hasMany: 'Transcript, Member' } }
+    Council: { uuid: uuid, externalId: integer, name: string, abbreviation: string, relationships: { hasMany: 'Member, Transcript' } }
+    Party: { uuid: uuid, externalId: integer, name: string, abbreviation: string, relationships: { hasMany: Member } }
+    ParlGroup: { uuid: uuid, externalId: integer, number: integer, isActive: boolean, code: string, name: string, abbreviation: string, nameUsedSince: 'datetime nullable', modified: datetime, colour: 'string:8 nullable', relationships: { hasMany: Member } }
+    Canton: { externalId: integer, number: integer, name: string, abbreviation: string, relationships: { hasMany: Member } }
+    Member: { uuid: uuid, externalId: integer, externalPersonId: integer, isActive: boolean, firstName: string, lastName: string, genderAsString: string, dateJoining: datetime, dateLeaving: datetime, dateElection: datetime, relationships: { belongsTo: 'Party, ParlGroup, Canton, Council', belongsToMany: ParlSession } }
+    Business: { uuid: uuid, externalId: integer, shortNumber: string, type: integer, typeName: string, typeAbbreviation: string, title: string, description: string, relationships: { hasMany: Transcript, belongsToMany: Tag } }
+    Tag: { uuid: uuid, ExternalId: integer, name: string, relationships: { hasMany: Business } }
+    Transcript: { uuid: uuid, externalId: integer, text: string, start: datetime, end: datetime, languageOfText: string, business_id: 'integer nullable', relationships: { belongsTo: 'ParlSession, Council, Member, Business' } }
