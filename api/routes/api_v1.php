@@ -10,3 +10,10 @@ Route::get(
         return (new StatsController())->basicDistribution($parl_session);
     }
 )->name('api.v1.stats.basicDistribution');
+
+Route::get(
+    "thematic-distribution/{parl_session:externalId}/",
+    function (ParlSession $parl_session) {
+        return (new StatsController())->thematicDistribution($parl_session);
+    }
+)->name('api.v1.stats.thematicDistribution');

@@ -11,4 +11,5 @@ if (!report.value) {
 <template>
     {{ report?.title }}
     {{ report?.lead }}
+      <ContentRenderer :value="report" />
 </template>

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Ramsey\Uuid\Uuid;
 
 class Tag extends Model
@@ -53,8 +54,8 @@ class Tag extends Model
         ];
     }
 
-    public function businesses(): HasMany
+    public function businesses(): BelongsToMany
     {
-        return $this->hasMany(Business::class);
+        return $this->belongsToMany(Business::class);
     }
 }

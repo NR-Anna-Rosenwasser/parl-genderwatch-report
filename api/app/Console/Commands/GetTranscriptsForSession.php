@@ -110,9 +110,12 @@ class GetTranscriptsForSession extends Command
                         continue;
                     }
                     $this->info("Found Business with ID {$business[0]["ID"]}, checking if it exists in local database or creating it");
-                    $localBusinessExists = Business::where('externalId', $business[0]['ID'])->count() > 0;
+                    $localBusinessExists = Business::where('externalId', $business[0]['ID'])->first();
                     if ($localBusinessExists) {
                         $this->info("Business with external ID {$business[0]['ID']} already exists in local database, skipping creation.");
+                        $this->info("Attaching business ID {$business[0]['ID']} to transcript ID {$insertedTranscript->externalId}");
+                        $insertedTranscript->business_id = $localBusinessExists->id;
+                        $insertedTranscript->save();
                         continue;
                     }
                     $localBusiness = Business::firstOrCreate(
@@ -127,7 +130,9 @@ class GetTranscriptsForSession extends Command
                             'description' => $business[0]['Description']
                         ]
                     );
-
+                    $this->info("Attaching business ID {$localBusiness->id} to transcript ID {$insertedTranscript->externalId}");
+                    $insertedTranscript->business_id = $localBusiness->id;
+                    $insertedTranscript->save();
                     if (!empty($business[0]['TagNames'])) {
                         $tags = explode('|', $business[0]['TagNames']);
                         $localBusiness->tags()->attach(

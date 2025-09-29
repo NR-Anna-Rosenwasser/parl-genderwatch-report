@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
+use App\Models\Tag;
 use App\Models\Council;
-use App\Models\ParlSession;
 use App\Models\Transcript;
+use App\Models\ParlSession;
+use App\Http\Controllers\Controller;
+use App\Models\Business;
 
 class StatsController extends Controller
 {
@@ -79,5 +81,93 @@ class StatsController extends Controller
                 'female' => $data['female']['percentageCount']
             ]
         ]);
+    }
+
+    public function thematicDistribution(ParlSession $session)
+    {
+        $validated = request()->validate(
+            rules: [
+                'council' => 'nullable|exists:councils,abbreviation',
+                'format' => 'in:json,csv',
+            ],
+        );
+        if (!isset($validated['format'])) {
+            $validated['format'] = 'json';
+        }
+        if (isset($validated['council'])) {
+            $council = Council::where('abbreviation', $validated['council'])->first();
+        } else {
+            $council = null;
+        }
+
+        $tags = Tag::whereHas('businesses', function ($query) use ($session, $council) {
+            // Query businesses where has transcripts in the given session and council if provided
+            $query->whereHas('transcripts', function ($query) use ($session, $council) {
+                $query->where('parl_session_id', $session->id);
+                if ($council) {
+                    $query->where('council_id', $council->id);
+                }
+            });
+        });
+        $data = [];
+        foreach ($tags->get() as $tag) {
+            $businesses = $tag->businesses()->whereHas('transcripts', function ($query) use ($session, $council) {
+                $query->where('parl_session_id', $session->id);
+                if ($council) {
+                    $query->where('council_id', $council->id);
+                }
+            })->get();
+            $maleTranscripts = collect();
+            $femaleTranscripts = collect();
+            $totalTranscripts = collect();
+            foreach ($businesses as $business) {
+                $transcripts = $business->transcripts()->where('parl_session_id', $session->id);
+                if ($council) {
+                    $transcripts = $transcripts->where('council_id', $council->id);
+                }
+                $transcripts = $transcripts->with('member')->get();
+                $maleTranscripts->push(...$transcripts->filter(function ($transcript) {
+                    return $transcript->member && $transcript->member->genderAsString === 'm';
+                }));
+                $femaleTranscripts->push(...$transcripts->filter(function ($transcript) {
+                    return $transcript->member && $transcript->member->genderAsString === 'f';
+                }));
+                $totalTranscripts->push(...$transcripts->filter(function ($transcript) {
+                    return $transcript->member && in_array($transcript->member->genderAsString, ['m', 'f']);
+                }));
+            }
+
+            $data[$tag->name] = [
+                'male' => [
+                    'count' => $maleTranscripts->count() / $totalTranscripts->count() * 100 ?? 0,
+                    'duration' => $maleTranscripts->sum('duration') / $totalTranscripts->sum('duration') * 100 ?? 0,
+                ],
+                'female' => [
+                    'count' => $femaleTranscripts->count() / $totalTranscripts->count() * 100 ?? 0,
+                    'duration' => $femaleTranscripts->sum('duration') / $totalTranscripts->sum('duration') * 100 ?? 0,
+                ],
+            ];
+        }
+        if ($validated['format'] === 'csv') {
+            return response()->streamDownload(
+                function () use ($data) {
+                    $csv = fopen('php://output', 'w');
+                    fputcsv($csv, ['Tag', 'Male Count', 'Male Duration', 'Female Count', 'Female Duration']);
+                    foreach ($data as $tag => $values) {
+                        fputcsv($csv, [
+                            $tag,
+                            $values['male']['count'],
+                            $values['male']['duration'],
+                            $values['female']['count'],
+                            $values['female']['duration'],
+                        ]);
+                    }
+                    fclose($csv);
+                },
+                'thematic_distribution.csv'
+            );
+        }
+
+        return response()->json($data);
     }
 }
