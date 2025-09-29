@@ -17,6 +17,9 @@ class StatsController extends Controller
                 'format' => 'in:json,csv',
             ],
         );
+        if (!isset($validated['format'])) {
+            $validated['format'] = 'json';
+        }
         if (isset($validated['council'])) {
             $council = Council::where('abbreviation', $validated['council'])->first();
         }
