@@ -199,7 +199,7 @@ class StatsController extends Controller
         }
         $metric = $validated['metric'] ?? 'duration';
 
-        $transcripts = Transcript::where('parl_session_id', $session->id)->with('member', 'member.canton');
+        $transcripts = Transcript::where('parl_session_id', $session->id)->with('member', 'member.canton')->whereHas('member')->whereHas('member.canton');
         if (isset($validated['council'])) {
             $council = Council::where('abbreviation', $validated['council'])->first();
             $transcripts = $transcripts->where('council_id', $council->id);
