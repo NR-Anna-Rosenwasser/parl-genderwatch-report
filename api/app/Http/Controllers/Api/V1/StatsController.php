@@ -239,7 +239,7 @@ class StatsController extends Controller
             return response()->streamDownload(
                 function () use ($data, $metric) {
                     $csv = fopen('php://output', 'w');
-                    $headers = ['Canton', ucfirst($metric) . ' (%)'];
+                    $headers = ['Canton', "male", "female"];
                     fputcsv($csv, $headers);
                     foreach ($data as $canton => $values) {
                         fputcsv($csv, [
