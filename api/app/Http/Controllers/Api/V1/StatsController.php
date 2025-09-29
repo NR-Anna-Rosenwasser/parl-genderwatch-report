@@ -89,6 +89,7 @@ class StatsController extends Controller
             rules: [
                 'council' => 'nullable|exists:councils,abbreviation',
                 'format' => 'in:json,csv',
+                'metric' => 'in:count,duration',
             ],
         );
         if (!isset($validated['format'])) {
@@ -99,6 +100,7 @@ class StatsController extends Controller
         } else {
             $council = null;
         }
+        $metric = $validated['metric'];
 
         $tags = Tag::whereHas('businesses', function ($query) use ($session, $council) {
             // Query businesses where has transcripts in the given session and council if provided
@@ -150,17 +152,29 @@ class StatsController extends Controller
         }
         if ($validated['format'] === 'csv') {
             return response()->streamDownload(
-                function () use ($data) {
+                function () use ($data, $metric) {
                     $csv = fopen('php://output', 'w');
-                    fputcsv($csv, ['Tag', 'Male Count', 'Male Duration', 'Female Count', 'Female Duration']);
+                    $headers = ['Tag'];
+                    if ($metric === 'count') {
+                        $headers = array_merge($headers, ['Male Count', 'Female Count']);
+                    } else {
+                        $headers = array_merge($headers, ['Male Duration', 'Female Duration']);
+                    }
+                    fputcsv($csv, $headers);
                     foreach ($data as $tag => $values) {
-                        fputcsv($csv, [
-                            $tag,
-                            $values['male']['count'],
-                            $values['male']['duration'],
-                            $values['female']['count'],
-                            $values['female']['duration'],
-                        ]);
+                        if ($metric === 'count') {
+                            fputcsv($csv, [
+                                $tag,
+                                $values['male']['count'],
+                                $values['female']['count'],
+                            ]);
+                        } else {
+                            fputcsv($csv, [
+                                $tag,
+                                $values['male']['duration'],
+                                $values['female']['duration'],
+                            ]);
+                        }
                     }
                     fclose($csv);
                 },
