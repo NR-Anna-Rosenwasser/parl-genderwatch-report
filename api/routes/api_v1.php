@@ -17,3 +17,9 @@ Route::get(
         return (new StatsController())->thematicDistribution($parl_session);
     }
 )->name('api.v1.stats.thematicDistribution');
+
+Route::get(
+    "cantonal-distribution/{parl_session:externalId}/",
+    function (ParlSession $parl_session) {
+        return (new StatsController())->cantonalDistribution($parl_session);
+    })->name('api.v1.stats.cantonalDistribution');

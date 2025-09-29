@@ -184,4 +184,76 @@ class StatsController extends Controller
 
         return response()->json($data);
     }
+
+    public function cantonalDistribution(ParlSession $session)
+    {
+        $validated = request()->validate(
+            rules: [
+                'format' => 'in:json,csv',
+                'council' => 'exists:councils,abbreviation',
+                'metric' => 'in:count,duration',
+            ],
+        );
+        if (!isset($validated['format'])) {
+            $validated['format'] = 'json';
+        }
+        $metric = $validated['metric'] ?? 'duration';
+
+        $transcripts = Transcript::where('parl_session_id', $session->id)->with('member', 'member.canton');
+        if (isset($validated['council'])) {
+            $council = Council::where('abbreviation', $validated['council'])->first();
+            $transcripts = $transcripts->where('council_id', $council->id);
+        }
+        $transcripts = $transcripts->get();
+
+        $grouped = $transcripts->groupBy(function ($transcript) {
+            return $transcript->member?->canton?->abbreviation ?? 'Unknown';
+        });
+        // Sum metric by canton and gender
+        $data = [];
+        foreach ($grouped as $canton => $transcripts) {
+            $maleTranscripts = $transcripts->filter(function ($transcript) {
+                return $transcript->member && $transcript->member->genderAsString === 'm';
+            });
+            $femaleTranscripts = $transcripts->filter(function ($transcript) {
+                return $transcript->member && $transcript->member->genderAsString === 'f';
+            });
+            $allTranscripts = $transcripts->filter(function ($transcript) {
+                return $transcript->member && in_array($transcript->member->genderAsString, ['m', 'f']);
+            });
+            if ($metric === 'count') {
+                $data[$canton] = [
+                    "male" => $maleTranscripts->count() / ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) * 100,
+                    "female" => $femaleTranscripts->count() / ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) * 100,
+                ];
+            }
+            else {
+                $data[$canton] = [
+                    "male" => $maleTranscripts->sum('duration') / ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1) * 100,
+                    "female" => $femaleTranscripts->sum('duration') / ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1) * 100,
+                ];
+            }
+        }
+        ksort($data);
+        if ($validated['format'] === 'csv') {
+            return response()->streamDownload(
+                function () use ($data, $metric) {
+                    $csv = fopen('php://output', 'w');
+                    $headers = ['Canton', ucfirst($metric) . ' (%)'];
+                    fputcsv($csv, $headers);
+                    foreach ($data as $canton => $values) {
+                        fputcsv($csv, [
+                            $canton,
+                            $values['male'],
+                            $values['female'],
+                        ]);
+                    }
+                    fclose($csv);
+                },
+                'cantonal_distribution.csv'
+            );
+        }
+
+        return response()->json($data);
+    }
 }
