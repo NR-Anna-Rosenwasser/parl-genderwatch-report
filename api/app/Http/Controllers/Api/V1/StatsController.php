@@ -43,26 +43,22 @@ class StatsController extends Controller
 
         $data = [
             "male" => [
-                "count" => $maleTranscripts->count(),
-                "duration" => $maleTranscripts->sum('duration'),
+                "percentageCount" => $maleTranscripts->count() / ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) * 100,
+                "percentageDuration" => $maleTranscripts->sum('duration') / ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1) * 100,
             ],
             "female" => [
-                "count" => $femaleTranscripts->count(),
-                "duration" => $femaleTranscripts->sum('duration'),
-            ],
-            "total" => [
-                "count" => $allTranscripts->count(),
-                "duration" => $allTranscripts->sum('duration'),
-            ],
+                "percentageCount" => $femaleTranscripts->count() / ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) * 100,
+                "percentageDuration" => $femaleTranscripts->sum('duration') / ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1) * 100,
+            ]
         ];
 
         if ($validated['format'] === 'csv') {
             return response()->streamDownload(
                 function () use ($data) {
                     $csv = fopen('php://output', 'w');
-                    fputcsv($csv, ['Metric', 'Male', 'Female', 'Total']);
-                    fputcsv($csv, ['Count', $data['male']['count'], $data['female']['count'], $data['total']['count']]);
-                    fputcsv($csv, ['Duration (seconds)', $data['male']['duration'], $data['female']['duration'], $data['total']['duration']]);
+                    fputcsv($csv, ['Metric', 'Male', 'Female']);
+                    fputcsv($csv, ['Count', $data['male']['percentageCount'], $data['female']['percentageCount']]);
+                    fputcsv($csv, ['Duration (seconds)', $data['male']['percentageDuration'], $data['female']['percentageDuration']]);
                     fclose($csv);
                 },
                 'basic_distribution_' . ($council->abbreviation ?? 'all') . '_' . $session->externalId . '.csv',
@@ -75,18 +71,12 @@ class StatsController extends Controller
 
         return response()->json([
             'duration' => [
-                'male' => $data['male']['duration'],
-                'female' => $data['female']['duration'],
-                'total' => $data['total']['duration'],
-                'percentageMale' => $data['total']['duration'] > 0 ? ($data['male']['duration'] / $data['total']['duration']) * 100 : 0,
-                'percentageFemale' => $data['total']['duration'] > 0 ? ($data['female']['duration'] / $data['total']['duration']) * 100 : 0
+                'male' => $data['male']['percentageDuration'],
+                'female' => $data['female']['percentageDuration'],
             ],
             'count' => [
-                'male' => $data['male']['count'],
-                'female' => $data['female']['count'],
-                'total' => $data['total']['count'],
-                'percentageMale' => $data['total']['count'] > 0 ? ($data['male']['count'] / $data['total']['count']) * 100 : 0,
-                'percentageFemale' => $data['total']['count'] > 0 ? ($data['female']['count'] / $data['total']['count']) * 100 : 0
+                'male' => $data['male']['percentageCount'],
+                'female' => $data['female']['percentageCount']
             ]
         ]);
     }
