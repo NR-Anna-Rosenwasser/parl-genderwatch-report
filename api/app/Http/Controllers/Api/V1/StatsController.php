@@ -131,27 +131,14 @@ class StatsController extends Controller
             return response()->streamDownload(
                 function () use ($data, $metric) {
                     $csv = fopen('php://output', 'w');
-                    $headers = ['Tag'];
-                    if ($metric === 'count') {
-                        $headers = array_merge($headers, ['Male Count', 'Female Count']);
-                    } else {
-                        $headers = array_merge($headers, ['Male Duration', 'Female Duration']);
-                    }
+                    $headers = ['Tag', 'Male', 'Female'];
                     fputcsv($csv, $headers);
                     foreach ($data as $tag => $values) {
-                        if ($metric === 'count') {
-                            fputcsv($csv, [
-                                $tag,
-                                $values['male']['count'],
-                                $values['female']['count'],
-                            ]);
-                        } else {
-                            fputcsv($csv, [
-                                $tag,
-                                $values['male']['duration'],
-                                $values['female']['duration'],
-                            ]);
-                        }
+                        fputcsv($csv, [
+                            $tag,
+                            $values['male'],
+                            $values['female'],
+                        ]);
                     }
                     fclose($csv);
                 },
