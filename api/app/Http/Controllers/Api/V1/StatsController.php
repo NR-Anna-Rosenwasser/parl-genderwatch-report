@@ -13,7 +13,8 @@ class StatsController extends Controller
     {
         $validated = request()->validate(
             rules: [
-                'council' => 'nullable|exists:councils,abbreviation'
+                'council' => 'nullable|exists:councils,abbreviation',
+                'format' => 'in:json,csv',
             ],
         );
         if (isset($validated['council'])) {
@@ -37,24 +38,52 @@ class StatsController extends Controller
             return $transcript->member && in_array($transcript->member->genderAsString, ['m', 'f']);
         });
 
-        $maleTranscriptDuration = $maleTranscripts->sum('duration');
-        $femaleTranscriptDuration = $femaleTranscripts->sum('duration');
-        $totalTranscriptDuration = $allTranscripts->sum('duration');
+        $data = [
+            "male" => [
+                "count" => $maleTranscripts->count(),
+                "duration" => $maleTranscripts->sum('duration'),
+            ],
+            "female" => [
+                "count" => $femaleTranscripts->count(),
+                "duration" => $femaleTranscripts->sum('duration'),
+            ],
+            "total" => [
+                "count" => $allTranscripts->count(),
+                "duration" => $allTranscripts->sum('duration'),
+            ],
+        ];
+
+        if ($validated['format'] === 'csv') {
+            return response()->streamDownload(
+                function () use ($data) {
+                    $csv = fopen('php://output', 'w');
+                    fputcsv($csv, ['Metric', 'Male', 'Female', 'Total']);
+                    fputcsv($csv, ['Count', $data['male']['count'], $data['female']['count'], $data['total']['count']]);
+                    fputcsv($csv, ['Duration (seconds)', $data['male']['duration'], $data['female']['duration'], $data['total']['duration']]);
+                    fclose($csv);
+                },
+                'basic_distribution_' . ($council->abbreviation ?? 'all') . '_' . $session->externalId . '.csv',
+                [
+                    'Content-Type' => 'text/csv',
+                    'Content-Disposition' => 'attachment; filename="basic_distribution.csv"',
+                ]
+            );
+        }
 
         return response()->json([
             'duration' => [
-                'male' => $maleTranscriptDuration,
-                'female' => $femaleTranscriptDuration,
-                'total' => $totalTranscriptDuration,
-                'percentageMale' => $totalTranscriptDuration > 0 ? ($maleTranscriptDuration / $totalTranscriptDuration) * 100 : 0,
-                'percentageFemale' => $totalTranscriptDuration > 0 ? ($femaleTranscriptDuration / $totalTranscriptDuration) * 100 : 0
+                'male' => $data['male']['duration'],
+                'female' => $data['female']['duration'],
+                'total' => $data['total']['duration'],
+                'percentageMale' => $data['total']['duration'] > 0 ? ($data['male']['duration'] / $data['total']['duration']) * 100 : 0,
+                'percentageFemale' => $data['total']['duration'] > 0 ? ($data['female']['duration'] / $data['total']['duration']) * 100 : 0
             ],
             'count' => [
-                'male' => $maleTranscripts->count(),
-                'female' => $femaleTranscripts->count(),
-                'total' => $allTranscripts->count(),
-                'percentageMale' => $allTranscripts->count() > 0 ? ($maleTranscripts->count() / $allTranscripts->count()) * 100 : 0,
-                'percentageFemale' => $allTranscripts->count() > 0 ? ($femaleTranscripts->count() / $allTranscripts->count()) * 100 : 0
+                'male' => $data['male']['count'],
+                'female' => $data['female']['count'],
+                'total' => $data['total']['count'],
+                'percentageMale' => $data['total']['count'] > 0 ? ($data['male']['count'] / $data['total']['count']) * 100 : 0,
+                'percentageFemale' => $data['total']['count'] > 0 ? ($data['female']['count'] / $data['total']['count']) * 100 : 0
             ]
         ]);
     }
