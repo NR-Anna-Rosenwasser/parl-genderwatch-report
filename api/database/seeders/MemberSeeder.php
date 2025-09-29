@@ -48,6 +48,7 @@ class MemberSeeder extends Seeder
                     "firstName" => $member['FirstName'],
                     "lastName" => $member['LastName'],
                     "genderAsString" => $member['GenderAsString'],
+                    "dateOfBirth" => $svc->parseODataDate($member['DateOfBirth']),
                     "dateJoining" => $svc->parseODataDate($member['DateJoining']),
                     "dateLeaving" => $svc->parseODataDate($member['DateLeaving']),
                     "dateElection" => $svc->parseODataDate($member['DateElection']),

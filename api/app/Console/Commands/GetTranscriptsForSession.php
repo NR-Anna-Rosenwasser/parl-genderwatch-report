@@ -40,7 +40,8 @@ class GetTranscriptsForSession extends Command
         $transcriptCount = $ws->query(
             model: "Transcript",
             countOnly: true,
-            filter: "IdSession eq '{$session->externalId}' and Language eq 'DE' and Text ne null and Start ne null",
+            //  and IdSession eq '5209'
+            filter: "IdSession eq '{$session->externalId}' and Language eq 'DE' and not substringof('VP-F', SpeakerFunction) and not substringof('VP-M', SpeakerFunction) and SpeakerFunction ne 'P-M' and SpeakerFunction ne 'P-F'",
             top: 0,
             select: false
         );
@@ -52,7 +53,7 @@ class GetTranscriptsForSession extends Command
             $transcripts = $ws->query(
                 model: "Transcript",
                 skip: $i * $this->option('batchSize'),
-                filter: "IdSession eq '{$session->externalId}' and Language eq 'DE' and Text ne null and Start ne null",
+                filter: "IdSession eq '{$session->externalId}' and Language eq 'DE' and not substringof('VP-F', SpeakerFunction) and not substringof('VP-M', SpeakerFunction) and SpeakerFunction ne 'P-M' and SpeakerFunction ne 'P-F'",
                 top: $this->option('batchSize'),
                 orderby: "ID asc",
                 countOnly: false,

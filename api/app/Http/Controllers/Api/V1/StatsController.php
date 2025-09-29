@@ -17,11 +17,15 @@ class StatsController extends Controller
             rules: [
                 'council' => 'nullable|exists:councils,abbreviation',
                 'format' => 'in:json,csv',
+                'metric' => 'in:count,duration',
+                'percentages' => 'boolean',
             ],
         );
-        if (!isset($validated['format'])) {
-            $validated['format'] = 'json';
-        }
+        $format = $validated['format'] ?? 'json';
+        $percentages = $validated['percentages'] ?? true;
+        $council = $validated['council'] ?? null;
+        $metric = $validated['metric'] ?? 'duration';
+
         if (isset($validated['council'])) {
             $council = Council::where('abbreviation', $validated['council'])->first();
         }
@@ -44,24 +48,16 @@ class StatsController extends Controller
         });
 
         $data = [
-            "male" => [
-                "percentageCount" => $maleTranscripts->count() / ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) * 100,
-                "percentageDuration" => $maleTranscripts->sum('duration') / ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1) * 100,
-            ],
-            "female" => [
-                "percentageCount" => $femaleTranscripts->count() / ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) * 100,
-                "percentageDuration" => $femaleTranscripts->sum('duration') / ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1) * 100,
-            ]
+            "male" => $percentages ? ($metric === 'count' ? $maleTranscripts->count() : $maleTranscripts->sum('duration')) / ($metric === 'count' ? ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) : ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1)) * 100 : ($metric === 'count' ? $maleTranscripts->count() : $maleTranscripts->sum('duration')),
+            "female" => $percentages ? ($metric === 'count' ? $femaleTranscripts->count() : $femaleTranscripts->sum('duration')) / ($metric === 'count' ? ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) : ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1)) * 100 : ($metric === 'count' ? $femaleTranscripts->count() : $femaleTranscripts->sum('duration')),
         ];
 
-        if ($validated['format'] === 'csv') {
+        if ($format === 'csv') {
             return response()->streamDownload(
                 function () use ($data) {
                     $csv = fopen('php://output', 'w');
-                    fputcsv($csv, ['Metric', 'Male', 'Female']);
-                    fputcsv($csv, ['Count', $data['male']['percentageCount'], $data['female']['percentageCount']]);
-                    fputcsv($csv, ['Duration (seconds)', $data['male']['percentageDuration'], $data['female']['percentageDuration']]);
-                    fclose($csv);
+                    fputcsv($csv, ['Male', 'Female']);
+                    fputcsv($csv, [$data['male'], $data['female']]);
                 },
                 'basic_distribution_' . ($council->abbreviation ?? 'all') . '_' . $session->externalId . '.csv',
                 [
@@ -71,16 +67,7 @@ class StatsController extends Controller
             );
         }
 
-        return response()->json([
-            'duration' => [
-                'male' => $data['male']['percentageDuration'],
-                'female' => $data['female']['percentageDuration'],
-            ],
-            'count' => [
-                'male' => $data['male']['percentageCount'],
-                'female' => $data['female']['percentageCount']
-            ]
-        ]);
+        return response()->json($data);
     }
 
     public function thematicDistribution(ParlSession $session)
@@ -90,17 +77,13 @@ class StatsController extends Controller
                 'council' => 'nullable|exists:councils,abbreviation',
                 'format' => 'in:json,csv',
                 'metric' => 'in:count,duration',
+                'percentages' => 'boolean',
             ],
         );
-        if (!isset($validated['format'])) {
-            $validated['format'] = 'json';
-        }
-        if (isset($validated['council'])) {
-            $council = Council::where('abbreviation', $validated['council'])->first();
-        } else {
-            $council = null;
-        }
-        $metric = $validated['metric'];
+        $format = $validated['format'] ?? 'json';
+        $percentages = $validated['percentages'] ?? true;
+        $council = Council::where('abbreviation', $validated['council'])->first() ?? null;
+        $metric = $validated['metric'] ?? 'duration';
 
         $tags = Tag::whereHas('businesses', function ($query) use ($session, $council) {
             // Query businesses where has transcripts in the given session and council if provided
@@ -121,7 +104,7 @@ class StatsController extends Controller
             })->get();
             $maleTranscripts = collect();
             $femaleTranscripts = collect();
-            $totalTranscripts = collect();
+            $allTranscripts = collect();
             foreach ($businesses as $business) {
                 $transcripts = $business->transcripts()->where('parl_session_id', $session->id);
                 if ($council) {
@@ -134,23 +117,17 @@ class StatsController extends Controller
                 $femaleTranscripts->push(...$transcripts->filter(function ($transcript) {
                     return $transcript->member && $transcript->member->genderAsString === 'f';
                 }));
-                $totalTranscripts->push(...$transcripts->filter(function ($transcript) {
+                $allTranscripts->push(...$transcripts->filter(function ($transcript) {
                     return $transcript->member && in_array($transcript->member->genderAsString, ['m', 'f']);
                 }));
             }
 
             $data[$tag->name] = [
-                'male' => [
-                    'count' => $maleTranscripts->count() / $totalTranscripts->count() * 100 ?? 0,
-                    'duration' => $maleTranscripts->sum('duration') / $totalTranscripts->sum('duration') * 100 ?? 0,
-                ],
-                'female' => [
-                    'count' => $femaleTranscripts->count() / $totalTranscripts->count() * 100 ?? 0,
-                    'duration' => $femaleTranscripts->sum('duration') / $totalTranscripts->sum('duration') * 100 ?? 0,
-                ],
+                "male" => $percentages ? ($metric === 'count' ? $maleTranscripts->count() : $maleTranscripts->sum('duration')) / ($metric === 'count' ? ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) : ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1)) * 100 : ($metric === 'count' ? $maleTranscripts->count() : $maleTranscripts->sum('duration')),
+                "female" => $percentages ? ($metric === 'count' ? $femaleTranscripts->count() : $femaleTranscripts->sum('duration')) / ($metric === 'count' ? ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) : ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1)) * 100 : ($metric === 'count' ? $femaleTranscripts->count() : $femaleTranscripts->sum('duration')),
             ];
         }
-        if ($validated['format'] === 'csv') {
+        if ($format === 'csv') {
             return response()->streamDownload(
                 function () use ($data, $metric) {
                     $csv = fopen('php://output', 'w');
@@ -192,11 +169,11 @@ class StatsController extends Controller
                 'format' => 'in:json,csv',
                 'council' => 'exists:councils,abbreviation',
                 'metric' => 'in:count,duration',
+                'percentages' => 'boolean',
             ],
         );
-        if (!isset($validated['format'])) {
-            $validated['format'] = 'json';
-        }
+        $format = $validated['format'] ?? 'json';
+        $percentages = $validated['percentages'] ?? true;
         $metric = $validated['metric'] ?? 'duration';
 
         $transcripts = Transcript::where('parl_session_id', $session->id)->with('member', 'member.canton')->whereHas('member')->whereHas('member.canton');
@@ -221,21 +198,13 @@ class StatsController extends Controller
             $allTranscripts = $transcripts->filter(function ($transcript) {
                 return $transcript->member && in_array($transcript->member->genderAsString, ['m', 'f']);
             });
-            if ($metric === 'count') {
-                $data[$canton] = [
-                    "male" => $maleTranscripts->count() / ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) * 100,
-                    "female" => $femaleTranscripts->count() / ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) * 100,
-                ];
-            }
-            else {
-                $data[$canton] = [
-                    "male" => $maleTranscripts->sum('duration') / ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1) * 100,
-                    "female" => $femaleTranscripts->sum('duration') / ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1) * 100,
-                ];
-            }
+            $data[$canton] = [
+                "male" => $percentages ? ($metric === 'count' ? $maleTranscripts->count() : $maleTranscripts->sum('duration')) / ($metric === 'count' ? ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) : ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1)) * 100 : ($metric === 'count' ? $maleTranscripts->count() : $maleTranscripts->sum('duration')),
+                "female" => $percentages ? ($metric === 'count' ? $femaleTranscripts->count() : $femaleTranscripts->sum('duration')) / ($metric === 'count' ? ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) : ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1)) * 100 : ($metric === 'count' ? $femaleTranscripts->count() : $femaleTranscripts->sum('duration')),
+            ];
         }
         ksort($data);
-        if ($validated['format'] === 'csv') {
+        if ($format === 'csv') {
             return response()->streamDownload(
                 function () use ($data, $metric) {
                     $csv = fopen('php://output', 'w');
@@ -251,6 +220,93 @@ class StatsController extends Controller
                     fclose($csv);
                 },
                 'cantonal_distribution.csv'
+            );
+        }
+
+        return response()->json($data);
+    }
+
+    public function ageDistribution(ParlSession $session)
+    {
+        $validated = request()->validate(
+            rules: [
+                'format' => 'in:json,csv',
+                'council' => 'exists:councils,abbreviation',
+                'metric' => 'in:count,duration',
+                'percentages' => 'boolean',
+            ],
+        );
+        $format = $validated['format'] ?? 'json';
+        $metric = $validated['metric'] ?? 'duration';
+        $percentages = $validated['percentages'] ?? true;
+
+        $ageBuckets = [
+            'u35' => [0, 35],
+            '36-45' => [36, 45],
+            '46-55' => [46, 55],
+            '56-65' => [56, 65],
+            '66+' => [66, 2000],
+        ];
+
+        $transcripts = Transcript::where('parl_session_id', $session->id)->with('member')->whereHas('member', function ($query) use ($ageBuckets) {
+            $query->whereNotNull('dateOfBirth');
+        });
+
+        if (isset($validated['council'])) {
+            $council = Council::where('abbreviation', $validated['council'])->first();
+            $transcripts = $transcripts->where('council_id', $council->id);
+        }
+        $transcripts = $transcripts->get();
+        $sessionDate = $session->startDate;
+        $grouped = [];
+        foreach ($ageBuckets as $bucket => [$min, $max]) {
+            $grouped[$bucket] = $transcripts->filter(function ($transcript) use ($sessionDate, $min, $max) {
+                if (!$transcript->member || !$transcript->member->dateOfBirth) {
+                    return false;
+                }
+                $age = $sessionDate->diffInYears($transcript->member->dateOfBirth) * -1;
+                return $age >= $min && $age <= $max;
+            });
+        }
+        $data = [];
+        foreach ($grouped as $bucket => $transcripts) {
+            $maleTranscripts = $transcripts->filter(function ($transcript) {
+                return $transcript->member && $transcript->member->genderAsString === 'm';
+            });
+            $femaleTranscripts = $transcripts->filter(function ($transcript) {
+                return $transcript->member && $transcript->member->genderAsString === 'f';
+            });
+            $allTranscripts = $transcripts->filter(function ($transcript) {
+                return $transcript->member && in_array($transcript->member->genderAsString, ['m', 'f']);
+            });
+            if ($metric === 'count') {
+                $data[$bucket] = [
+                    "male" => $percentages ? $maleTranscripts->count() / ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) * 100 : $maleTranscripts->count(),
+                    "female" => $percentages ? $femaleTranscripts->count() / ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) * 100 : $femaleTranscripts->count(),
+                ];
+            } else {
+                $data[$bucket] = [
+                    "male" => $percentages ? $maleTranscripts->sum('duration') / ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1) * 100 : $maleTranscripts->sum('duration'),
+                    "female" => $percentages ? $femaleTranscripts->sum('duration') / ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1) * 100 : $femaleTranscripts->sum('duration'),
+                ];
+            }
+        }
+        if ($format === 'csv') {
+            return response()->streamDownload(
+                function () use ($data, $metric) {
+                    $csv = fopen('php://output', 'w');
+                    $headers = ['Age Bucket', 'Male', 'Female'];
+                    fputcsv($csv, $headers);
+                    foreach ($data as $bucket => $values) {
+                        fputcsv($csv, [
+                            $bucket,
+                            $values['male'],
+                            $values['female'],
+                        ]);
+                    }
+                    fclose($csv);
+                },
+                'age_distribution.csv'
             );
         }
 
