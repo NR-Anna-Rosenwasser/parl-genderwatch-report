@@ -299,4 +299,68 @@ class StatsController extends Controller
 
         return response()->json($data);
     }
+
+    public function groupDistribution(ParlSession $session)
+    {
+        $validated = request()->validate(
+            rules: [
+                'format' => 'in:json,csv',
+                'council' => 'nullable|exists:councils,abbreviation',
+                'metric' => 'in:count,duration',
+                'percentages' => 'boolean',
+            ],
+        );
+        $format = $validated['format'] ?? 'json';
+        $percentages = $validated['percentages'] ?? true;
+        $council = Council::where('abbreviation', $validated['council'])->first() ?? null;
+        $metric = $validated['metric'] ?? 'duration';
+
+        $transcripts = Transcript::where('parl_session_id', $session->id)->with('member', 'member.parlGroup')->whereHas('member', function ($query) {
+            $query->whereNotNull('parl_group_id');
+        });
+        if ($council ?? false) {
+            $transcripts = $transcripts->where('council_id', $council->id);
+        }
+        $transcripts = $transcripts->get();
+
+        $grouped = $transcripts->groupBy(function ($transcript) {
+            return $transcript->member?->parlGroup?->name;
+        });
+        $data = [];
+        foreach ($grouped as $group => $transcripts) {
+            $maleTranscripts = $transcripts->filter(function ($transcript) {
+                return $transcript->member && $transcript->member->genderAsString === 'm';
+            });
+            $femaleTranscripts = $transcripts->filter(function ($transcript) {
+                return $transcript->member && $transcript->member->genderAsString === 'f';
+            });
+            $allTranscripts = $transcripts->filter(function ($transcript) {
+                return $transcript->member && in_array($transcript->member->genderAsString, ['m', 'f']);
+            });
+            $data[$group] = [
+                "male" => $percentages ? ($metric === 'count' ? $maleTranscripts->count() : $maleTranscripts->sum('duration')) / ($metric === 'count' ? ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) : ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1)) * 100 : ($metric === 'count' ? $maleTranscripts->count() : $maleTranscripts->sum('duration')),
+                "female" => $percentages ? ($metric === 'count' ? $femaleTranscripts->count() : $femaleTranscripts->sum('duration')) / ($metric === 'count' ? ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) : ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1)) * 100 : ($metric === 'count' ? $femaleTranscripts->count() : $femaleTranscripts->sum('duration')),
+            ];
+        }
+        ksort($data);
+        if ($format === 'csv') {
+            return response()->streamDownload(
+                function () use ($data, $metric) {
+                    $csv = fopen('php://output', 'w');
+                    $headers = ['Parliamentary Group', 'Male', 'Female'];
+                    fputcsv($csv, $headers);
+                    foreach ($data as $group => $values) {
+                        fputcsv($csv, [
+                            $group,
+                            $values['male'],
+                            $values['female']
+                        ]);
+                    }
+                    fclose($csv);
+                },
+                'group_distribution.csv'
+            );
+        }
+        return response()->json($data);
+    }
 }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Member;
+use App\Models\ParlGroup;
 use App\Models\Party;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -53,7 +54,7 @@ class MemberSeeder extends Seeder
                     "dateLeaving" => $svc->parseODataDate($member['DateLeaving']),
                     "dateElection" => $svc->parseODataDate($member['DateElection']),
                     "party_id" => Party::where('externalId', $member['Party'])->first()?->id ?? Party::where('name', 'parteilos')->first()?->id,
-                    "parl_group_id" => $member['ParlGroupNumber'],
+                    "parl_group_id" => ParlGroup::where('number', $member['ParlGroupNumber'])->first()?->id ?? null,
                     "canton_id" => $member['Canton'],
                     "council_id" => $member['Council']
                 ]);

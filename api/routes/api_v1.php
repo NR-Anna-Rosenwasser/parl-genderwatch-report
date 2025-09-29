@@ -29,3 +29,9 @@ Route::get(
     function (ParlSession $parl_session) {
         return (new StatsController())->ageDistribution($parl_session);
     })->name('api.v1.stats.ageDistribution');
+
+Route::get(
+    "group-distribution/{parl_session:externalId}/",
+    function (ParlSession $parl_session) {
+        return (new StatsController())->groupDistribution($parl_session);
+    })->name('api.v1.stats.groupDistribution');
