@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Canton;
+use App\Models\Council;
 use App\Models\Member;
 use App\Models\ParlGroup;
 use App\Models\Party;
@@ -55,8 +57,8 @@ class MemberSeeder extends Seeder
                     "dateElection" => $svc->parseODataDate($member['DateElection']),
                     "party_id" => Party::where('externalId', $member['Party'])->first()?->id ?? Party::where('name', 'parteilos')->first()?->id,
                     "parl_group_id" => ParlGroup::where('number', $member['ParlGroupNumber'])->first()?->id ?? null,
-                    "canton_id" => $member['Canton'],
-                    "council_id" => $member['Council']
+                    "canton_id" => Canton::where("externalId", $member['Canton'])->first()?->id,
+                    "council_id" => Council::where("externalId", $member['Council'])->first()?->id,
                 ]);
             }
         }
