@@ -47,6 +47,7 @@ class Transcript extends Model
         'parl_session_id',
         'council_id',
         'member_id',
+        'function',
     ];
 
     /**

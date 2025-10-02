@@ -35,13 +35,16 @@ class GetTranscriptsForSession extends Command
         $session = select('Select a parliamentary session:', ParlSession::orderBy("id", "desc")->get()->pluck('name', 'id'));
         $session = ParlSession::find($session);
 
+        $this->info("Removing all transcripts for session: {$session->name}");
+        \App\Models\Transcript::where('parl_session_id', $session->id)->delete();
+
         $this->info("Querying Webservice for transcript count for session: {$session->name}");
         $ws = new \App\Helpers\Webservice();
         $transcriptCount = $ws->query(
             model: "Transcript",
             countOnly: true,
             //  and IdSession eq '5209'
-            filter: "IdSession eq '{$session->externalId}' and Language eq 'DE' and not substringof('VP-F', SpeakerFunction) and not substringof('VP-M', SpeakerFunction) and SpeakerFunction ne 'P-M' and SpeakerFunction ne 'P-F'",
+            filter: "IdSession eq '{$session->externalId}' and Language eq 'DE'",
             top: 0,
             select: false
         );
@@ -53,7 +56,7 @@ class GetTranscriptsForSession extends Command
             $transcripts = $ws->query(
                 model: "Transcript",
                 skip: $i * $this->option('batchSize'),
-                filter: "IdSession eq '{$session->externalId}' and Language eq 'DE' and not substringof('VP-F', SpeakerFunction) and not substringof('VP-M', SpeakerFunction) and SpeakerFunction ne 'P-M' and SpeakerFunction ne 'P-F'",
+                filter: "IdSession eq '{$session->externalId}' and Language eq 'DE'",
                 top: $this->option('batchSize'),
                 orderby: "ID asc",
                 countOnly: false,
@@ -63,6 +66,7 @@ class GetTranscriptsForSession extends Command
                 $start = isset($transcript['Start']) ? $ws->parseODataDate($transcript['Start']) : null;
                 $end = isset($transcript['End']) ? $ws->parseODataDate($transcript['End']) : null;
                 $duration = (isset($start, $end)) ? $end->getTimestamp() - $start->getTimestamp() : null;
+
                 $transcriptData = [
                     'externalId' => $transcript['ID'],
                     'text' => $transcript['Text'],
@@ -73,6 +77,7 @@ class GetTranscriptsForSession extends Command
                     "parl_session_id" => $session->id,
                     "council_id" => Council::where('abbreviation', $transcript['MeetingCouncilAbbreviation'] . "R")->first()?->id,
                     "member_id" => Member::where('externalId', $transcript['PersonNumber'])->first()?->id,
+                    "function" => $transcript['SpeakerFunction'] ?? null,
                 ];
 
                 $insertedTranscript = \App\Models\Transcript::updateOrCreate(
