@@ -37,3 +37,10 @@ Route::get(
         return (new TranscriptStatsController())->groupDistribution($parl_session);
     }
 )->name('api.v1.stats.transcripts.groupDistribution');
+
+Route::get(
+    "historic-distribution/{parl_session:externalId}/",
+    function (ParlSession $parl_session) {
+        return (new TranscriptStatsController())->historicDistribution($parl_session);
+    }
+)->name('api.v1.stats.transcripts.historicDistribution');

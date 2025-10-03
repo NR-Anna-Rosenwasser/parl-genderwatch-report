@@ -327,4 +327,41 @@ class TranscriptStatsController extends Controller
         }
         return response()->json($data);
     }
+
+    public function historicDistribution(ParlSession $session)
+    {
+        $validated = $this->validateApiRequest(request());
+        $sessions = ParlSession::where('startDate', '<=', $session->endDate)->whereHas('transcripts')->orderBy('startDate')->get();
+        $data = [];
+        foreach ($sessions as $session) {
+            $transcripts = $this->buildTranscriptQuery(
+                session_id: $session->id,
+                includePresidency: $validated['include_presidency'],
+                includeFederalCouncil: $validated['include_federal_council'],
+                council: $validated['council']
+            )->with('member')->get();
+            $split = $this->splitMaleAndFemale($transcripts);
+            $values = $this->calculateValues($split['male'], $split['female'], $split['all'], $validated['metric'], $validated['percentages']);
+            $data[$session->startDate->format('Y-m-d')] = $values;
+        }
+        if ($validated['format'] === 'csv') {
+            return response()->streamDownload(
+                function () use ($data) {
+                    $csv = fopen('php://output', 'w');
+                    $headers = ['Session Start Date', 'Male', 'Female'];
+                    fputcsv($csv, $headers);
+                    foreach ($data as $date => $values) {
+                        fputcsv($csv, [
+                            $date,
+                            $values['male'],
+                            $values['female']
+                        ]);
+                    }
+                    fclose($csv);
+                },
+                $this->makeFileName('historic_distribution', $validated['council'], $session->externalId, $validated['metric'], $validated['percentages'])
+            );
+        }
+        return response()->json($data);
+    }
 }
