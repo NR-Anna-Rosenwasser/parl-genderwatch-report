@@ -108,6 +108,9 @@ class MemberStatsController extends Controller
             $distribution[$abbreviation] = $this->calculateGenderDistribution(collect($membersInCanton), $validated['percentages']);
         }
 
+        // Sort by canton abbreviation
+        ksort($distribution);
+
         if ($validated['format'] === 'csv') {
             return response()->streamDownload(
                 function () use ($distribution) {
@@ -189,6 +192,8 @@ class MemberStatsController extends Controller
         foreach ($groups as $abbreviation => $membersInGroup) {
             $distribution[$abbreviation] = $this->calculateGenderDistribution(collect($membersInGroup), $validated['percentages']);
         }
+
+        ksort($distribution);
 
         if ($validated['format'] === 'csv') {
             return response()->streamDownload(

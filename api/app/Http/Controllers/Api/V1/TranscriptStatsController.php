@@ -202,7 +202,7 @@ class TranscriptStatsController extends Controller
             $values = $this->calculateValues($split['male'], $split['female'], $split['all'], $validated['metric'], $validated['percentages']);
             $data[$theme] = $values;
         }
-
+        ksort($data);
         if ($validated['format'] === 'csv') {
             return response()->streamDownload(
                 function () use ($data) {
@@ -306,7 +306,7 @@ class TranscriptStatsController extends Controller
             $values = $this->calculateValues($split['male'], $split['female'], $split['all'], $validated['metric'], $validated['percentages']);
             $data[$group] = $values;
         }
-
+        ksort($data);
         if ($validated['format'] === 'csv') {
             return response()->streamDownload(
                 function () use ($data) {
