@@ -393,19 +393,19 @@ class TranscriptStatsController extends Controller
         }
         // Sort members for both councils by duration desc
         usort($members['nr'], fn($a, $b) => $b['duration'] <=> $a['duration']);
-        $schnurri = Member::find($members['nr'][0]['member_id'])->select('id', 'firstName', 'lastName')->first();
+        $schnurri = Member::where("id", $members['nr'][0]['member_id'])->select('id', 'firstName', 'lastName')->first();
         $return["duration_nr"] = "{$schnurri->firstName} {$schnurri->lastName} ({$members['nr'][0]['duration']}s)";
 
         usort($members['sr'], fn($a, $b) => $b['duration'] <=> $a['duration']);
-        $schnurri = Member::find($members['sr'][0]['member_id'])->select('id', 'firstName', 'lastName')->first();
+        $schnurri = Member::where("id", $members['sr'][0]['member_id'])->select('id', 'firstName', 'lastName')->first();
         $return["duration_sr"] = "{$schnurri->firstName} {$schnurri->lastName} ({$members['sr'][0]['duration']}s)";
 
         usort($members['nr'], fn($a, $b) => $b['count'] <=> $a['count']);
-        $schnurri = Member::find($members['nr'][0]['member_id'])->select('id', 'firstName', 'lastName')->first();
+        $schnurri = Member::where("id", $members['nr'][0]['member_id'])->select('id', 'firstName', 'lastName')->first();
         $return["count_nr"] = "{$schnurri->firstName} {$schnurri->lastName} ({$members['nr'][0]['count']} Wortmeldungen)";
 
         usort($members['sr'], fn($a, $b) => $b['count'] <=> $a['count']);
-        $schnurri = Member::find($members['sr'][0]['member_id'])->select('id', 'firstName', 'lastName')->first();
+        $schnurri = Member::where("id", $members['sr'][0]['member_id'])->select('id', 'firstName', 'lastName')->first();
         $return["count_sr"] = "{$schnurri->firstName} {$schnurri->lastName} ({$members['sr'][0]['count']} Wortmeldungen)";
 
         return response()->json($return);
