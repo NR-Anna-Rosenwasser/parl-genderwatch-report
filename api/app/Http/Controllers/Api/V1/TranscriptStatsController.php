@@ -28,7 +28,7 @@ class TranscriptStatsController extends Controller
             "council" => $validated['council'] ?? null,
             "metric" => $validated['metric'] ?? 'duration',
             "include_presidency" => $validated['include_presidency'] ?? false,
-            "include_federal_council" => $validated['include_federal_council'] ?? true,
+            "include_federal_council" => $validated['include_federal_council'] ?? false,
         ];
     }
 
