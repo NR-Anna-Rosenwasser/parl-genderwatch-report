@@ -11,30 +11,52 @@ use App\Models\Business;
 
 class StatsController extends Controller
 {
-    public function basicDistribution(ParlSession $session)
+    private function validateApiRequest($request)
     {
-        $validated = request()->validate(
+        $validated = $request->validate(
             rules: [
                 'council' => 'nullable|exists:councils,abbreviation',
+                'include_presidency' => 'boolean',
+                'include_federal_council' => 'boolean',
                 'format' => 'in:json,csv',
                 'metric' => 'in:count,duration',
                 'percentages' => 'boolean',
             ],
         );
-        $format = $validated['format'] ?? 'json';
-        $percentages = $validated['percentages'] ?? true;
-        $council = $validated['council'] ?? null;
-        $metric = $validated['metric'] ?? 'duration';
 
-        if (isset($validated['council'])) {
-            $council = Council::where('abbreviation', $validated['council'])->first();
-        }
-        $transcripts = Transcript::where('parl_session_id', $session->id)->with('member');
-        if ($council ?? false) {
-            $transcripts = $transcripts->where('council_id', $council->id);
-        }
-        $transcripts = $transcripts->get();
+        return [
+            "format" => $validated['format'] ?? 'json',
+            "percentages" => $validated['percentages'] ?? true,
+            "council" => $validated['council'] ?? null,
+            "metric" => $validated['metric'] ?? 'duration',
+            "include_presidency" => $validated['include_presidency'] ?? false,
+            "include_federal_council" => $validated['include_federal_council'] ?? true,
+        ];
+    }
 
+    private function buildTranscriptQuery($session_id, bool $includePresidency = false, bool $includeFederalCouncil = true, string $council = null)
+    {
+        $transcriptQuery = Transcript::where('parl_session_id', $session_id);
+        if (!$includePresidency) {
+            // Filter transcript to explude where function contains "P-", "1VP-" or "2VP-"
+            $transcriptQuery = $transcriptQuery->whereNotLike('function', 'P-%')->whereNotLike('function', '1VP-%')->whereNotLike('function', '2VP-%');
+        }
+
+        if (!$includeFederalCouncil) {
+            // Filter transcript to exclude where function contains "BR-" or "BPR-" or "VPBR-"
+            $transcriptQuery = $transcriptQuery->whereNotLike('function', 'BR-%')->whereNotLike('function', 'BPR-%')->whereNotLike('function', 'VPBR-%');
+        }
+        if ($council) {
+            $council = Council::where('abbreviation', $council)->first();
+            if ($council) {
+                $transcriptQuery = $transcriptQuery->where('council_id', $council->id);
+            }
+        }
+        return $transcriptQuery;
+    }
+
+    private function splitMaleAndFemale($transcripts)
+    {
         $maleTranscripts = $transcripts->filter(function ($transcript) {
             return $transcript->member && $transcript->member->genderAsString === 'm';
         });
@@ -47,19 +69,64 @@ class StatsController extends Controller
             return $transcript->member && in_array($transcript->member->genderAsString, ['m', 'f']);
         });
 
-        $data = [
-            "male" => $percentages ? ($metric === 'count' ? $maleTranscripts->count() : $maleTranscripts->sum('duration')) / ($metric === 'count' ? ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) : ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1)) * 100 : ($metric === 'count' ? $maleTranscripts->count() : $maleTranscripts->sum('duration')),
-            "female" => $percentages ? ($metric === 'count' ? $femaleTranscripts->count() : $femaleTranscripts->sum('duration')) / ($metric === 'count' ? ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) : ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1)) * 100 : ($metric === 'count' ? $femaleTranscripts->count() : $femaleTranscripts->sum('duration')),
+        return [
+            "male" => $maleTranscripts,
+            "female" => $femaleTranscripts,
+            "all" => $allTranscripts
         ];
+    }
 
-        if ($format === 'csv') {
+    private function calculateValues($maleTranscripts, $femaleTranscripts, $allTranscripts, $metric, $percentages)
+    {
+        if ($metric === 'count') {
+            $male = $maleTranscripts->count();
+            $female = $femaleTranscripts->count();
+            $all = $allTranscripts->count();
+        } else {
+            $male = $maleTranscripts->sum('duration');
+            $female = $femaleTranscripts->sum('duration');
+            $all = $allTranscripts->sum('duration');
+        }
+        return [
+            "male" => $percentages ? $male / ($all > 0 ? $all : 1) * 100 : $male,
+            "female" => $percentages ? $female / ($all > 0 ? $all : 1) * 100 : $female,
+            "all" => $percentages ? 100 : $all
+        ];
+    }
+
+    private function makeFileName($prefix, $councilAbbreviation, $sessionExternalId, $metric, $percentages)
+    {
+        return
+            $prefix
+            . "_council_" . ($councilAbbreviation ?? 'all')
+            . '_session_' . $sessionExternalId
+            . '_metric_' . ($metric ?? 'count')
+            . '_percentages_' . ($percentages ? 'true' : 'false')
+            . '.csv';
+    }
+
+    public function basicDistribution(ParlSession $session)
+    {
+        $validated = $this->validateApiRequest(request());
+        $transcripts = $this->buildTranscriptQuery(
+            session_id: $session->id,
+            includePresidency: $validated['include_presidency'],
+            includeFederalCouncil: $validated['include_federal_council'],
+            council: $validated['council']
+        )->with('member')->get();
+
+        $split = $this->splitMaleAndFemale($transcripts);
+
+        $values = $this->calculateValues($split['male'], $split['female'], $split['all'], $validated['metric'], $validated['percentages']);
+
+        if ($validated['format'] === 'csv') {
             return response()->streamDownload(
-                function () use ($data) {
+                function () use ($values) {
                     $csv = fopen('php://output', 'w');
                     fputcsv($csv, ['Male', 'Female']);
-                    fputcsv($csv, [$data['male'], $data['female']]);
+                    fputcsv($csv, [$values['male'], $values['female']]);
                 },
-                'basic_distribution_' . ($council->abbreviation ?? 'all') . '_' . $session->externalId . '.csv',
+                $this->makeFileName('basic_distribution', $validated['council'], $session->externalId, $validated['metric'], $validated['percentages']),
                 [
                     'Content-Type' => 'text/csv',
                     'Content-Disposition' => 'attachment; filename="basic_distribution.csv"',
@@ -67,69 +134,34 @@ class StatsController extends Controller
             );
         }
 
-        return response()->json($data);
+        return response()->json($values);
     }
 
     public function thematicDistribution(ParlSession $session)
     {
-        $validated = request()->validate(
-            rules: [
-                'council' => 'nullable|exists:councils,abbreviation',
-                'format' => 'in:json,csv',
-                'metric' => 'in:count,duration',
-                'percentages' => 'boolean',
-            ],
-        );
-        $format = $validated['format'] ?? 'json';
-        $percentages = $validated['percentages'] ?? true;
-        $council = Council::where('abbreviation', $validated['council'])->first() ?? null;
-        $metric = $validated['metric'] ?? 'duration';
+        $validated = $this->validateApiRequest(request());
+        $transcripts = $this->buildTranscriptQuery(
+            session_id: $session->id,
+            includePresidency: $validated['include_presidency'],
+            includeFederalCouncil: $validated['include_federal_council'],
+            council: $validated['council']
+        )->with('member', 'business', 'business.tags')->get();
 
-        $tags = Tag::whereHas('businesses', function ($query) use ($session, $council) {
-            // Query businesses where has transcripts in the given session and council if provided
-            $query->whereHas('transcripts', function ($query) use ($session, $council) {
-                $query->where('parl_session_id', $session->id);
-                if ($council) {
-                    $query->where('council_id', $council->id);
-                }
-            });
+        $grouped = $transcripts->groupBy(function ($transcript) {
+            return $transcript->business->tags->pluck('name')->toArray();
         });
-        $data = [];
-        foreach ($tags->get() as $tag) {
-            $businesses = $tag->businesses()->whereHas('transcripts', function ($query) use ($session, $council) {
-                $query->where('parl_session_id', $session->id);
-                if ($council) {
-                    $query->where('council_id', $council->id);
-                }
-            })->get();
-            $maleTranscripts = collect();
-            $femaleTranscripts = collect();
-            $allTranscripts = collect();
-            foreach ($businesses as $business) {
-                $transcripts = $business->transcripts()->where('parl_session_id', $session->id);
-                if ($council) {
-                    $transcripts = $transcripts->where('council_id', $council->id);
-                }
-                $transcripts = $transcripts->with('member')->get();
-                $maleTranscripts->push(...$transcripts->filter(function ($transcript) {
-                    return $transcript->member && $transcript->member->genderAsString === 'm';
-                }));
-                $femaleTranscripts->push(...$transcripts->filter(function ($transcript) {
-                    return $transcript->member && $transcript->member->genderAsString === 'f';
-                }));
-                $allTranscripts->push(...$transcripts->filter(function ($transcript) {
-                    return $transcript->member && in_array($transcript->member->genderAsString, ['m', 'f']);
-                }));
-            }
 
-            $data[$tag->name] = [
-                "male" => $percentages ? ($metric === 'count' ? $maleTranscripts->count() : $maleTranscripts->sum('duration')) / ($metric === 'count' ? ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) : ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1)) * 100 : ($metric === 'count' ? $maleTranscripts->count() : $maleTranscripts->sum('duration')),
-                "female" => $percentages ? ($metric === 'count' ? $femaleTranscripts->count() : $femaleTranscripts->sum('duration')) / ($metric === 'count' ? ($allTranscripts->count() > 0 ? $allTranscripts->count() : 1) : ($allTranscripts->sum('duration') > 0 ? $allTranscripts->sum('duration') : 1)) * 100 : ($metric === 'count' ? $femaleTranscripts->count() : $femaleTranscripts->sum('duration')),
-            ];
+        $data = [];
+        foreach ($grouped as $theme => $transcripts) {
+            $split = $this->splitMaleAndFemale($transcripts);
+            $values = $this->calculateValues($split['male'], $split['female'], $split['all'], $validated['metric'], $validated['percentages']);
+            $data[$theme] = $values;
         }
-        if ($format === 'csv') {
+
+
+        if ($validated['format'] === 'csv') {
             return response()->streamDownload(
-                function () use ($data, $metric) {
+                function () use ($data) {
                     $csv = fopen('php://output', 'w');
                     $headers = ['Tag', 'Male', 'Female'];
                     fputcsv($csv, $headers);
@@ -142,7 +174,7 @@ class StatsController extends Controller
                     }
                     fclose($csv);
                 },
-                'thematic_distribution.csv'
+                $this->makeFileName('thematic_distribution', $validated['council'], $session->externalId, $validated['metric'], $validated['percentages'])
             );
         }
 
