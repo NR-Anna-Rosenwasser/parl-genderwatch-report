@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Models\Member;
 use App\Models\Council;
 use App\Models\Transcript;
 use App\Models\ParlSession;
@@ -364,5 +365,49 @@ class TranscriptStatsController extends Controller
             );
         }
         return response()->json($data);
+    }
+
+    public function schnurri(ParlSession $session)
+    {
+        $councils = ['nr', 'sr'];
+        $members = [];
+        foreach ($councils as $council) {
+            $transcripts = $this->buildTranscriptQuery(
+                session_id: $session->id,
+                includePresidency: false,
+                includeFederalCouncil: false,
+                council: $council
+            )->with('member')->get();
+
+            // Group by member id
+            $grouped = $transcripts->groupBy("member.id");
+            foreach ($grouped as $memberId => $transcripts) {
+                $duration = $transcripts->sum('duration');
+                $count = $transcripts->count();
+                $members[$council][] = [
+                    'member_id' => $memberId,
+                    'duration' => $duration,
+                    'count' => $count,
+                ];
+            }
+        }
+        // Sort members for both councils by duration desc
+        usort($members['nr'], fn($a, $b) => $b['duration'] <=> $a['duration']);
+        $schnurri = Member::find($members['nr'][0]['member_id'])->select('id', 'firstName', 'lastName')->first();
+        $return["duration_nr"] = "{$schnurri->firstName} {$schnurri->lastName} ({$members['nr'][0]['duration']}s)";
+
+        usort($members['sr'], fn($a, $b) => $b['duration'] <=> $a['duration']);
+        $schnurri = Member::find($members['sr'][0]['member_id'])->select('id', 'firstName', 'lastName')->first();
+        $return["duration_sr"] = "{$schnurri->firstName} {$schnurri->lastName} ({$members['sr'][0]['duration']}s)";
+
+        usort($members['nr'], fn($a, $b) => $b['count'] <=> $a['count']);
+        $schnurri = Member::find($members['nr'][0]['member_id'])->select('id', 'firstName', 'lastName')->first();
+        $return["count_nr"] = "{$schnurri->firstName} {$schnurri->lastName} ({$members['nr'][0]['count']} Wortmeldungen)";
+
+        usort($members['sr'], fn($a, $b) => $b['count'] <=> $a['count']);
+        $schnurri = Member::find($members['sr'][0]['member_id'])->select('id', 'firstName', 'lastName')->first();
+        $return["count_sr"] = "{$schnurri->firstName} {$schnurri->lastName} ({$members['sr'][0]['count']} Wortmeldungen)";
+
+        return response()->json($return);
     }
 }

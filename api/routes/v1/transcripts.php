@@ -44,3 +44,10 @@ Route::get(
         return (new TranscriptStatsController())->historicDistribution($parl_session);
     }
 )->name('api.v1.stats.transcripts.historicDistribution');
+
+Route::get(
+    'schnurri/{parl_session:externalId}/',
+    function (ParlSession $parl_session) {
+        return (new TranscriptStatsController())->schnurri($parl_session);
+    }
+)->name('api.v1.stats.transcripts.schnurri');
