@@ -95,6 +95,6 @@ class Member extends Model
 
     public function parlSessions(): BelongsToMany
     {
-        return $this->belongsToMany(ParlSession::class);
+        return $this->belongsToMany(ParlSession::class, "member_parl_session", "member_id", "parl_session_id");
     }
 }

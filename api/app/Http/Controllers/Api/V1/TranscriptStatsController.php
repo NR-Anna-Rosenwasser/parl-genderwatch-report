@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Models\Tag;
 use App\Models\Council;
 use App\Models\Transcript;
 use App\Models\ParlSession;
 use App\Http\Controllers\Controller;
-use App\Models\Business;
 
 class TranscriptStatsController extends Controller
 {

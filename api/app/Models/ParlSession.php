@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Ramsey\Uuid\Uuid;
 
 class ParlSession extends Model
@@ -68,5 +69,10 @@ class ParlSession extends Model
     public function transcripts(): HasMany
     {
         return $this->hasMany(Transcript::class);
+    }
+
+    public function members(): BelongsToMany
+    {
+        return $this->belongsToMany(Member::class, "member_parl_session", "parl_session_id", "member_id");
     }
 }
