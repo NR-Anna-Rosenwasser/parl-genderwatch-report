@@ -124,8 +124,9 @@ class TranscriptStatsController extends Controller
             return response()->streamDownload(
                 function () use ($values) {
                     $csv = fopen('php://output', 'w');
-                    fputcsv($csv, ['Male', 'Female']);
-                    fputcsv($csv, [$values['male'], $values['female']]);
+                    fputcsv($csv, ['Gender', 'Value']);
+                    fputcsv($csv, ["Male", $values['male']]);
+                    fputcsv($csv, ["Female", $values['female']]);
                 },
                 $this->makeFileName('basic_distribution', $validated['council'], $session->externalId, $validated['metric'], $validated['percentages']),
                 [
