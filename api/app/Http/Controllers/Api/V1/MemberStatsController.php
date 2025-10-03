@@ -34,7 +34,8 @@ class MemberStatsController extends Controller
                 $members = $session->members()->where('council_id', $council->id);
             }
         } else {
-            $members = $session->members();
+            // Filter members where council_id is 1 or 2 (exclude federal council members)
+            $members = $session->members()->whereIn('council_id', [1, 2]);
         }
         return $members;
     }
