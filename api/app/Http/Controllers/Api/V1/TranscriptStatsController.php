@@ -9,7 +9,7 @@ use App\Models\ParlSession;
 use App\Http\Controllers\Controller;
 use App\Models\Business;
 
-class StatsController extends Controller
+class TranscriptStatsController extends Controller
 {
     private function validateApiRequest($request)
     {
