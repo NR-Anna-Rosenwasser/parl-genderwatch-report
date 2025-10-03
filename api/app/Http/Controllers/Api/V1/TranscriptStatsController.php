@@ -331,7 +331,7 @@ class TranscriptStatsController extends Controller
     public function historicDistribution(ParlSession $session)
     {
         $validated = $this->validateApiRequest(request());
-        $sessions = ParlSession::where('startDate', '<=', $session->endDate)->whereHas('transcripts')->orderBy('startDate')->get();
+        $sessions = ParlSession::where('startDate', '<=', $session->endDate)->where("type", 2)->whereHas('transcripts')->orderBy('startDate')->get();
         $data = [];
         foreach ($sessions as $session) {
             $transcripts = $this->buildTranscriptQuery(
