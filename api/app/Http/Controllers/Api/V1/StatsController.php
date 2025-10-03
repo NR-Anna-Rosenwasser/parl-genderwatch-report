@@ -87,11 +87,14 @@ class StatsController extends Controller
             $female = $femaleTranscripts->sum('duration');
             $all = $allTranscripts->sum('duration');
         }
-        return [
+        $return = [
             "male" => $percentages ? $male / ($all > 0 ? $all : 1) * 100 : $male,
-            "female" => $percentages ? $female / ($all > 0 ? $all : 1) * 100 : $female,
-            "all" => $percentages ? 100 : $all
+            "female" => $percentages ? $female / ($all > 0 ? $all : 1) * 100 : $female
         ];
+        if (!$percentages) {
+            $return['all'] = $all;
+        }
+        return $return;
     }
 
     private function makeFileName($prefix, $councilAbbreviation, $sessionExternalId, $metric, $percentages)
