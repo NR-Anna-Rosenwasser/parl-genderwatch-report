@@ -1,4 +1,4 @@
-# Die Sessionsberichte
+# Die Berichte
 
 ::reportGrid
 ::

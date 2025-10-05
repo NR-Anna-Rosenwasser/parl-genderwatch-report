@@ -3,6 +3,8 @@ import {ref} from 'vue'
 useSeoMeta({
   title: 'Genderwatch Report – Weil Repräsentation wichtig ist',
   description: 'In der letzen Session des eidgenössischen Parlaments haben Männer 67% der Redezeit eingenommen. Der Genderwatch Report zeigt, wie es um die Geschlechterverteilung in der Politik steht.',
+  ogDescription: 'In der letzen Session des eidgenössischen Parlaments haben Männer 67% der Redezeit eingenommen. Der Genderwatch Report zeigt, wie es um die Geschlechterverteilung in der Politik steht.',
+  ogImage: '/images/og/og.png',
 })
 const home = await queryCollection('content').path("/pages/").first()
 const homeAnimated = ref(false);

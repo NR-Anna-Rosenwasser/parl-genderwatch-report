@@ -1,7 +1,12 @@
 <script setup>
 const number = useRoute().params.number
 const report = await queryCollection('reports').where('number', '=', Number(number)).first()
-console.log(report)
+useSeoMeta({
+  title: report ? `${report.title} – Genderwatch Report` : 'Genderwatch Report',
+  description: report ? report.teaser : 'Der Genderwatch Report zeigt, wie es um die Geschlechterverteilung in der Politik steht.',
+  ogDescription: report ? report.teaser : 'Der Genderwatch Report zeigt, wie es um die Geschlechterverteilung in der Politik steht.',
+  ogImage: `/images/og/og_${report ? report.number : 'default'}.png`,
+})
 </script>
 
 <template>
