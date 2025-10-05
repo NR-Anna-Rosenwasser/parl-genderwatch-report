@@ -6,7 +6,7 @@ let femaleElement = ref(null);
 let taglineElement = ref(null);
 import { useRuntimeConfig } from '#app'
 const config = useRuntimeConfig();
-const response = await useFetch(`${config.public.apiUrl}/transcripts/basic-distribution/${config.public.currentSession}?percentages=0`);
+const response = await useFetch(`https://api.gwr.rose-water.ch/api/v1/transcripts/basic-distribution/5210?percentages=0`);
 
 onMounted(async () => {
     const maleCountUp = new CountUp(maleElement.value, response.data.value.male / 60, {
