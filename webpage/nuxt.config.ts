@@ -16,6 +16,11 @@ export default defineNuxtConfig({
     app: {
         pageTransition: { name: 'page', mode: 'out-in' },
     },
+    vite: {
+        esbuild: {
+            drop: ['console', 'debugger'],
+        },
+    },
     runtimeConfig: {
         public: {
             apiUrl: process.env.API_URL || 'http://localhost:8000/api/v1',
