@@ -1,0 +1,9 @@
+html {
+    font-size: clamp(16px, 1.044vw, 25px);
+    line-height: 1.3;
+    @apply bg-background text-default;
+
+    .underline {
+        @apply decoration-accent;
+    }
+}

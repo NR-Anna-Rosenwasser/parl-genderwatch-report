@@ -1,0 +1,22 @@
+.gwr-default-page,
+.gwr-default-post {
+
+    a:not(.no-underline):not(h1 a):not(h2 a):not(h3 a):not(h4 a):not(h5 a):not(h6 a) {
+        @apply underline;
+    }
+
+    p+p {
+        @apply mt-4;
+    }
+
+    // A to target="_blank" links
+    a[target="_blank"]::after {
+        content: " ↗";
+        font-size: 0.75em;
+        vertical-align: middle;
+    }
+
+    footer a[target="_blank"]::after {
+        content: "";
+    }
+}
